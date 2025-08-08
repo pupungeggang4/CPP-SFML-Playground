@@ -10,13 +10,23 @@
 int main()
 {
     // create the window
+    sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();
+    std::cout << desktopMode.size.x << std::endl;
+    unsigned int width, height;
+    if (desktopMode.size.x > 1600) {
+        width = 1600;
+        height = 1200;
+    } else {
+        width = 800;
+        height = 600;
+    }
     sf::ContextSettings settings;
     settings.depthBits = 24;
     settings.stencilBits = 8;
     settings.antiAliasingLevel = 0;
     settings.majorVersion = 4;
     settings.minorVersion = 1;
-    sf::RenderWindow window(sf::VideoMode({800, 600}), "OpenGL", sf::Style::Default, sf::State::Windowed, settings);
+    sf::RenderWindow window(sf::VideoMode({width, height}), "OpenGL", sf::Style::Default, sf::State::Windowed, settings);
     sf::View view({400.f, 300.f}, {800.f, 600.f});
     window.setView(view);
     window.setVerticalSyncEnabled(true);
