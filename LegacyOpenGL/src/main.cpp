@@ -8,7 +8,7 @@ int main()
     unsigned int width = 0, height = 0;
     // create the window
     sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();
-    std::cout << desktopMode.size.x << std::endl;
+
     if (desktopMode.size.x > 2000) {
         width = 1600;
         height = 1200;
