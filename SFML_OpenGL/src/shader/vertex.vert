@@ -1,4 +1,4 @@
-#version 410
+#version 410 core
 uniform int u_mode_v;
 in vec4 a_position;
 in vec2 a_texcoord;

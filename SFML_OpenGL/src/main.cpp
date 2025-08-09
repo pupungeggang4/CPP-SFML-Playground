@@ -4,8 +4,6 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-//#include <SFML/OpenGL.hpp>
 
 int main()
 {
@@ -26,14 +24,9 @@ int main()
     settings.antiAliasingLevel = 0;
     settings.majorVersion = 4;
     settings.minorVersion = 1;
-    sf::RenderWindow window(sf::VideoMode({width, height}), "OpenGL", sf::Style::Default, sf::State::Windowed, settings);
-    sf::View view({400.f, 300.f}, {800.f, 600.f});
-    window.setView(view);
+    settings.attributeFlags = sf::ContextSettings::Attribute::Core;
+    sf::Window window(sf::VideoMode({width, height}), "OpenGL", sf::Style::Default, sf::State::Windowed, settings);
     window.setVerticalSyncEnabled(true);
-
-    const sf::Font font("font/neodgm.ttf");
-    sf::Text text(font, "Hello SFML", 32);
-    text.setPosition({20, 40});
 
     // activate the window
     window.setActive(true);
@@ -135,8 +128,6 @@ int main()
         }
 
         // clear the buffers
-        window.clear();
-        window.setActive(true);
         glClearColor(0.0, 0.0, 1.0, 1.0);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -154,16 +145,7 @@ int main()
         glVertexAttribPointer(laPosition, 3, GL_FLOAT, false, sizeof(float) * 3, (void*)(0));
         glEnableVertexAttribArray(laPosition);
         glDrawArrays(GL_TRIANGLES, 0, 3);
-        glBindVertexArray(0);
 
-        window.setActive(false);
-        window.pushGLStates();
-
-        sf::CircleShape c(20.f);
-        c.setFillColor(sf::Color::Green);
-        window.draw(c);
-        window.draw(text);
-        window.popGLStates();
         window.display();
     }
 

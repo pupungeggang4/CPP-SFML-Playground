@@ -1,4 +1,4 @@
-#version 410
+#version 410 core
 precision highp float;
 uniform int u_mode_f;
 uniform sampler2D u_texture;
