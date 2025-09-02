@@ -1,6 +1,7 @@
 #include "game.hpp"
 
 Game::Game() {
+    sf::err().rdbuf(NULL);
     window = sf::RenderWindow(sf::VideoMode({1280u, 720u}), "Adventure Game");
     window.setFramerateLimit(60);
     tex.insert(std::make_pair("test", sf::Texture("image/test.png")));
