@@ -4,8 +4,10 @@
 
 class Game {
     public:
-        shared_ptr<sf::RenderWindow> window;
-
+        sf::RenderWindow window;
+        std::unordered_map<std::string, sf::Texture> tex;
+        sf::Texture emptyTex;
+        sf::Sprite s = sf::Sprite(emptyTex);
         Game();
         void run();
 };
