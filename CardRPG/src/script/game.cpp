@@ -1,7 +1,7 @@
 #include "game.hpp"
 
 Game::Game() {
-    window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
+    window = sf::RenderWindow(sf::VideoMode({1280u, 720u}), "Adventure Game");
     window.setFramerateLimit(60);
     tex.insert(std::make_pair("test", sf::Texture("image/test.png")));
     s.setTexture(tex.at("test"));
