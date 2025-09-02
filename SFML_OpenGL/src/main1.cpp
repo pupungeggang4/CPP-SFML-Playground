@@ -3,9 +3,9 @@
 #include <fstream>
 #include <iostream>
 #include <glad/gl.h>
-#include <SFML/Window.hpp>
+
 #include <SFML/Graphics.hpp>
-//#include <SFML/OpenGL.hpp>
+#include <SFML/Window.hpp>
 
 int main()
 {
@@ -26,14 +26,15 @@ int main()
     settings.antiAliasingLevel = 0;
     settings.majorVersion = 3;
     settings.minorVersion = 3;
+    settings.attributeFlags = sf::ContextSettings::Attribute::Default;
     sf::RenderWindow window(sf::VideoMode({width, height}), "OpenGL", sf::Style::Default, sf::State::Windowed, settings);
     window.setVerticalSyncEnabled(true);
     sf::View view({400.f, 300.f}, {800.f, 600.f});
-    window.setView(view);
 
+    window.setView(view);
     const sf::Font font("font/neodgm.ttf");
     sf::Text text(font, "Hello SFML", 32);
-    text.setPosition({20, 40});
+    text.setPosition({20, 20});
 
     sf::err().rdbuf(NULL);
     // activate the window
@@ -135,9 +136,9 @@ int main()
             }
         }
 
-        // clear the buffers
         window.clear();
         window.setActive(true);
+        // clear the buffers
         glClearColor(0.0, 0.0, 1.0, 1.0);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

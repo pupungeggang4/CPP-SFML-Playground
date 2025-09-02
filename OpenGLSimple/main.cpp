@@ -1,11 +1,11 @@
 #include <iostream>
-#include <glad/glad.h>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
 
 int main()
 {
+    sf::err().rdbuf(NULL);
     unsigned int width = 0, height = 0;
     // create the window
     sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();
@@ -28,9 +28,6 @@ int main()
 
     // activate the window
     window.setActive(true);
-
-    // load resources, initialize the OpenGL states, ...
-    gladLoadGL();
 
     // run the main loop
     bool running = true;
