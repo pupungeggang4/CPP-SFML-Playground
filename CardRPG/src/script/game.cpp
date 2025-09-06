@@ -1,4 +1,5 @@
-#include "game.hpp"
+#include "general.hpp"
+#include "decl.hpp"
 
 Game::Game() {
     sf::err().rdbuf(NULL);
@@ -19,26 +20,19 @@ Game::Game() {
     s.setTexture(tex.at("test"));
     s.setTextureRect(sf::IntRect({0, 0}, {80, 80}));
     s.setPosition({200.0f, 200.0f});
-    run();
 }
 
-void Game::run() {
-    while (window.isOpen()) {
-        while (const std::optional event = window.pollEvent()) {
+void Game::run(shared_ptr<Game> game) {
+    while (game->window.isOpen()) {
+        while (const std::optional event = game->window.pollEvent()) {
             if (event->is<sf::Event::Closed>()) {
-                window.close();
+                game->window.close();
             }
         }
-        loop();
+        loop(game);
     }
 }
 
-void Game::loop() {
-    SceneTitle::render(this);
-}
-
-template <typename Game>
-void SceneTitle::render(Game game) {
-    game->window.clear();
-    game->window.display();
+void Game::loop(shared_ptr<Game> game) {
+    renderTitle(game);
 }
