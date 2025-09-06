@@ -18,7 +18,7 @@ Game::Game() {
     tex.insert(std::make_pair("test", sf::Texture("image/test.png")));
     s.setTexture(tex.at("test"));
     s.setTextureRect(sf::IntRect({0, 0}, {80, 80}));
-    s.setPosition({20.0f, 20.0f});
+    s.setPosition({200.0f, 200.0f});
     run();
 }
 
@@ -29,8 +29,6 @@ void Game::run() {
                 window.close();
             }
         }
-        window.clear(sf::Color::Black);
-        window.draw(s);
-        window.display();
+        SceneTitle::loop(shared_from_this());
     }
 }

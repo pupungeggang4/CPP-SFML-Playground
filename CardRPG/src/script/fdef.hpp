@@ -1,5 +1,8 @@
 #pragma once
 
 class Game;
-class Vec2;
-class Rect2;
+class Player;
+class Field;
+class Battle;
+class SceneTitle;
+class SceneField;
