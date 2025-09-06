@@ -43,7 +43,8 @@
 .DS_Store
 *.swp
 *.png~
-
+main
+main.exe
 build/
 Release/
 glad/
