@@ -34,5 +34,5 @@ void Game::run(shared_ptr<Game> game) {
 }
 
 void Game::loop(shared_ptr<Game> game) {
-    renderTitle(game);
+    loopTitle(game);
 }

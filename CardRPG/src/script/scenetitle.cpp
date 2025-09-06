@@ -1,8 +1,11 @@
 #include "general.hpp"
 #include "decl.hpp"
 
-template <typename Game2>
-void renderTitle(Game2 game) {
-    game->window.clear(sf::Color::Green);
+void loopTitle(shared_ptr<Game> game) {
+    renderTitle(game);
+}
+
+void renderTitle(shared_ptr<Game> game) {
+    game->window.clear();
     game->window.display();
 }

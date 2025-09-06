@@ -7,7 +7,6 @@ class Battle;
 
 class Game {
     public:
-        shared_ptr<Game> g;
         sf::RenderWindow window;
         std::unordered_map<std::string, sf::Texture> tex;
         sf::Texture emptyTex;
@@ -20,5 +19,5 @@ class Game {
 
 bool pointInsideRectUI(sf::Vector2f pos, sf::FloatRect rect);
 
-template <typename Game2>
-void renderTitle(Game2 game);
+void loopTitle(shared_ptr<Game> game);
+void renderTitle(shared_ptr<Game> game);
