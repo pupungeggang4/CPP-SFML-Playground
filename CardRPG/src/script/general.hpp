@@ -7,6 +7,7 @@
 #include <memory>
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 
 using std::shared_ptr;
 using std::make_shared;

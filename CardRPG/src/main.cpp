@@ -1,4 +1,5 @@
 #include "script/general.hpp"
+#include "script/fdef.hpp"
 #include "script/game.hpp"
 #include "script/scenetitle.hpp"
 
