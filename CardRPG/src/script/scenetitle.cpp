@@ -1,7 +1,7 @@
 #include "scenetitle.hpp"
 
 template <typename Game>
-void render(Game *game) {
+void SceneTitle::render(Game game) {
     game->window.clear();
     game->window.display();
 }

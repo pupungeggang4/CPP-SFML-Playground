@@ -34,5 +34,11 @@ void Game::run() {
 }
 
 void Game::loop() {
-    render(this);
+    SceneTitle::render(this);
+}
+
+template <typename Game>
+void SceneTitle::render(Game game) {
+    game->window.clear();
+    game->window.display();
 }
