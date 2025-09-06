@@ -1,8 +1,6 @@
 #pragma once
 #include "general.hpp"
 #include "fdef.hpp"
-#include "scenetitle.hpp"
-#include "scenefield.hpp"
 
 class Game : public std::enable_shared_from_this<Game> {
     public:
@@ -13,4 +11,5 @@ class Game : public std::enable_shared_from_this<Game> {
 
         Game();
         void run();
+        void loop();
 };

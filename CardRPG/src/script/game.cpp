@@ -29,6 +29,10 @@ void Game::run() {
                 window.close();
             }
         }
-        SceneTitle::loop(shared_from_this());
+        loop();
     }
+}
+
+void Game::loop() {
+    render(this);
 }

@@ -4,5 +4,5 @@ class Game;
 class Player;
 class Field;
 class Battle;
-class SceneTitle;
-class SceneField;
+
+extern void render(Game *game);
