@@ -5,6 +5,7 @@
 
 int main()
 {
+    sf::err().rdbuf(NULL);
     unsigned int width = 0, height = 0;
     // create the window
     sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();
