@@ -36,6 +36,9 @@ class Game {
         sf::Font neodgm = sf::Font("font/neodgm.ttf");
         sf::RectangleShape rTmpRect = sf::RectangleShape({0.0f, 0.0f});
         sf::Text rTmpText = sf::Text(neodgm, "Hello", 32);
+
+        unsigned int width, height;
+        std::string scene, state;
         Game();
         void run(shared_ptr<Game> game);
 };
@@ -51,11 +54,16 @@ class Render {
 };
 
 class SceneTitle {
-
+    public:
+        static void loop(shared_ptr<Game> game);
+        static void render(shared_ptr<Game> game);
+        static void mouseUp(shared_ptr<Game> game, sf::Vector2f pos);
 };
 
 class SceneGame {
-
+    public:
+        static void loop(shared_ptr<Game> game);
+        static void render(shared_ptr<Game> game);
 };
 
-bool pointInsideRectUI(sf::Vector2f point, sf::FloatRect rect);
+bool pointInsideRectUI(sf::Vector2f point, std::vector<float> rect);

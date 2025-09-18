@@ -3,7 +3,6 @@
 
 Game::Game() {
     sf::err().rdbuf(NULL);
-    unsigned int width, height;
     sf::VideoMode videoMode = sf::VideoMode::getDesktopMode();
     if (videoMode.size.x > 2000) {
         width = 1920; height = 1080;
@@ -15,6 +14,9 @@ Game::Game() {
     window.setFramerateLimit(60);
     sf::View view({640, 360}, {1280, 720});
     window.setView(view);
+
+    scene = "title";
+    state = "";
 }
 
 void Game::run(shared_ptr<Game> game) {
@@ -26,18 +28,21 @@ void Game::run(shared_ptr<Game> game) {
             {
                 game->window.close();
             }
+
+            if (const auto *mouse = event->getIf<sf::Event::MouseButtonReleased>()) {
+                sf::Vector2f mousePos = {mouse->position.x * 1280.0f / width, mouse->position.y * 720.0f / height};
+                if (scene == "title") {
+                    SceneTitle::mouseUp(game, mousePos);
+                } else if (scene == "game") {
+
+                }
+            }
         }
 
-        game->window.clear(sf::Color::White);
-        rTmpRect.setOutlineColor(sf::Color::Black);
-        rTmpRect.setOutlineThickness(2.0f);
-        rTmpText.setCharacterSize(32);
-        rTmpText.setFillColor(sf::Color::Black);
-        Render::fillTextUI(game->window, rTmpText, "Auto Card Battle", UITitle["text_title"]);
-        Render::strokeRectUI(game->window, rTmpRect, UITitle["button_start"]);
-        Render::fillTextUI(game->window, rTmpText, "Start Game", UITitle["text_start"]);
-        Render::strokeRectUI(game->window, rTmpRect, UITitle["button_collection"]);
-        Render::fillTextUI(game->window, rTmpText, "Collection", UITitle["text_collection"]);
-        game->window.display();
+        if (scene == "title") {
+            SceneTitle::render(game);
+        } else if (scene == "game") {
+            SceneGame::render(game);
+        }
     }
 }
