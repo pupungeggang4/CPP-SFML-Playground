@@ -19,15 +19,27 @@ class SceneTitle;
 class SceneGame;
 
 class Card {
+    public:
+        std::string name;
+        std::string element;
+        std::string rarity;
+        std::string type;
+        int attack, hp;
+        std::vector<shared_ptr<Crystal>> crystal;
 
+        Card();
+        void setData(int ID);
 };
 
 class Crystal {
-
+    public:
+        std::string name;
+        std::string element;
 };
 
 class Unit {
-
+    public:
+        int hp, hpMax, attack;
 };
 
 class Game {
