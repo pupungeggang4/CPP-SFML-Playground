@@ -21,6 +21,7 @@ int main()
     sf::View view({400, 300}, {800, 600});
     const sf::Font font("font/neodgm.ttf");
     sf::Text text(font, "Hello SFML", 32);
+    text.setPosition({10.0f, 10.0f});
 
     window.setView(view);
     window.setVerticalSyncEnabled(true);

@@ -12,11 +12,11 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-file(GLOB SCRIPTS src/script/*.cpp)
+file(GLOB SCRIPTS src/code/*.cpp)
 file(COPY "${CMAKE_SOURCE_DIR}/src/font" DESTINATION "${CMAKE_BINARY_DIR}/bin")
 #file(COPY "${CMAKE_SOURCE_DIR}/src/image" DESTINATION "${CMAKE_BINARY_DIR}/bin")
 
 add_executable(main src/main.cpp ${SCRIPTS})
-target_include_directories(main PUBLIC ${CMAKE_SOURCE_DIR}/src/script)
+target_include_directories(main PUBLIC ${CMAKE_SOURCE_DIR}/src/code)
 target_compile_features(main PRIVATE cxx_std_17)
 target_link_libraries(main PRIVATE SFML::Graphics)
