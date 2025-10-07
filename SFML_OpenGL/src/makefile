@@ -1,2 +1,0 @@
-linuxbrew:
-	clang++ main1.cpp glad/src/gl.c -o main -I glad/include -I /home/linuxbrew/.linuxbrew/include -L /home/linuxbrew/.linuxbrew/lib -rpath /home/linuxbrew/.linuxbrew/lib -lsfml-graphics -lsfml-window -lsfml-system
