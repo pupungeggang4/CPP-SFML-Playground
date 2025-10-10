@@ -39,6 +39,7 @@ void Game::handleInput(shared_ptr<Game> game) {
 
         if (const auto *mouseReleased = event->getIf<sf::Event::MouseButtonReleased>()) {
             sf::Vector2i pos = {int(mouseReleased->position.x * 1280 / width), int(mouseReleased->position.y * 720 / height)};
+            std::cout << pos.x << "," << pos.y << std::endl;
         }
     }
 
