@@ -51,5 +51,14 @@ class SceneField {
 };
 
 class Game {
+    public:
+        unsigned int width, height;
+        sf::RenderWindow window;
+        std::string scene = "title";
+        std::string state = "";
 
+        Game();
+        void run(shared_ptr<Game>);
+        void handleInput(shared_ptr<Game>);
+        void handleScene(shared_ptr<Game>);
 };
