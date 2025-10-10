@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp>
+#include "code/general.hpp"
 
 int main()
 {
