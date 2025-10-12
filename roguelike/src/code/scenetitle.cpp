@@ -20,7 +20,6 @@ void SceneTitle::render(shared_ptr<Game> game) {
 }
 
 void SceneTitle::keyDown(shared_ptr<Game> game, int key) {
-    std::cout << key << std::endl;
     if (key == K_UP) {
         game->selectedTitle = (game->selectedTitle + 2) % 3;
     } else if (key == K_DOWN) {
