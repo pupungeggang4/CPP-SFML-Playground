@@ -12,10 +12,15 @@
 
 #include <memory>
 
-#include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 
 using std::shared_ptr;
 using std::make_shared;
-using UICoord = std::variant<std::vector<int>, std::vector<std::vector<int>> >;
+
+#define K_RIGHT 86
+#define K_LEFT 87
+#define K_DOWN 88
+#define K_UP 89
+#define K_RETURN 36

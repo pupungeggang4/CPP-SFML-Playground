@@ -29,6 +29,7 @@ Game::Game() {
     scene = "title";
     state = "";
     menu = false;
+    selectedTitle = 0;
 }
 
 void Game::run(shared_ptr<Game> game) {
@@ -48,6 +49,17 @@ void Game::handleInput(shared_ptr<Game> game) {
     while (const std::optional event = window.pollEvent()) {
         if (event->is<sf::Event::Closed>()) {
             window.close();
+        }
+
+        if (const auto *keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+            int key = int(keyPressed->scancode);
+            if (game->scene == "title") {
+                SceneTitle::keyDown(game, key);
+            }
+        }
+
+        if (const auto *keyReleased = event->getIf<sf::Event::KeyReleased>()) {
+
         }
     }
 }

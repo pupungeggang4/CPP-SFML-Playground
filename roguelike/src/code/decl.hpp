@@ -20,7 +20,7 @@ class Game;
 
 class UI {
     public:
-        static std::unordered_map<std::string, std::any> title;
+        static std::unordered_map<std::string, std::vector<std::vector<int>>> title;
         static std::unordered_map<std::string, std::vector<int>> village;
         static std::unordered_map<std::string, std::vector<int>> battle;
         static std::unordered_map<std::string, std::vector<int>> menu;
@@ -28,9 +28,9 @@ class UI {
 
 class Render {
     public:
-        static void fillText(sf::RenderWindow& window, sf::Text rText, std::string text, std::any pos);
-        static void strokeRect(sf::RenderWindow& window, sf::RectangleShape rRect, std::any rect);
-        static void drawTexture(sf::RenderWindow& window, sf::Texture texture, sf::Sprite sprite, std::any pos);
+        static void fillText(sf::RenderWindow& window, sf::Text rText, std::string text, std::vector<int> pos);
+        static void strokeRect(sf::RenderWindow& window, sf::RectangleShape rRect, std::vector<int> rect);
+        static void drawTexture(sf::RenderWindow& window, sf::Texture texture, sf::Sprite sprite, std::vector<int> pos);
 };
 
 class Func {
@@ -66,11 +66,11 @@ class Game {
         unsigned int width, height;
         sf::Text rText = sf::Text(Res::neodgm);
         sf::RectangleShape rRect;
-        sf::RenderTexture rt = sf::RenderTexture({1280, 720});
-        sf::Texture texture;
-        sf::Sprite sprite = sf::Sprite(texture);
+        sf::Texture t = sf::Texture();
+        sf::Sprite sprite = sf::Sprite(t);
         std::string scene, state;
         bool menu;
+        int selectedTitle;
 
         Game();
         void run(shared_ptr<Game> game);
