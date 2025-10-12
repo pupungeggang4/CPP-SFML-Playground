@@ -15,7 +15,7 @@ void SceneTitle::render(shared_ptr<Game> game) {
     Render::fillText(game->window, game->rText, "Collection", UI::title["text_collection"][0]);
     Render::strokeRect(game->window, game->rRect, UI::title["button_exit"][0]);
     Render::fillText(game->window, game->rText, "Exit", UI::title["text_exit"][0]);
-    Render::drawTexture(game->window, Res::arrow, game->sprite, UI::title["arrow"][game->selectedTitle]);
+    Render::drawTexture(game->window, game->tex["arrow"], game->sprite, UI::title["arrow"][game->selectedTitle]);
     game->window.display();
 }
 

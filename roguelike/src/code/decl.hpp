@@ -1,7 +1,6 @@
 #pragma once
 #include "general.hpp"
 
-class Res;
 class UI;
 
 class Adventure;
@@ -54,25 +53,26 @@ class SceneBattle {
     
 };
 
-class Res {
-    public:
-        static sf::Font neodgm;
-        static sf::Texture arrow;
-};
-
 class Game {
     public:
         sf::RenderWindow window;
         unsigned int width, height;
-        sf::Text rText = sf::Text(Res::neodgm);
         sf::RectangleShape rRect;
+
+        sf::Font neodgm;
+        std::unordered_map<std::string, sf::Texture> tex;
+ 
+        sf::Text rText = sf::Text(neodgm, "", 32);
         sf::Texture t = sf::Texture();
         sf::Sprite sprite = sf::Sprite(t);
+
         std::string scene, state;
         bool menu;
         int selectedTitle;
 
         Game();
+        void loadFont();
+        void loadImage();
         void run(shared_ptr<Game> game);
         void handleScene(shared_ptr<Game> game);
         void handleInput(shared_ptr<Game> game);

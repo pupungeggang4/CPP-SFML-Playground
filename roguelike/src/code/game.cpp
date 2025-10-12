@@ -21,7 +21,10 @@ Game::Game() {
     sf::View view({640, 360}, {1280, 720});
     window.setView(view);
 
-    Res::neodgm.setSmooth(false);
+    loadFont();
+    loadImage();
+
+    rText = sf::Text(neodgm, "", 32);
     rText.setFillColor(sf::Color::Black);
     rRect.setOutlineThickness(2);
     rRect.setOutlineColor(sf::Color::Black);
@@ -62,4 +65,13 @@ void Game::handleInput(shared_ptr<Game> game) {
 
         }
     }
+}
+
+void Game::loadFont() {
+    neodgm = sf::Font("font/neodgm.ttf");
+    neodgm.setSmooth(false);
+}
+
+void Game::loadImage() {
+    tex.emplace("arrow", sf::Texture("image/arrow.png"));
 }
