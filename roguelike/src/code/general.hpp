@@ -4,6 +4,7 @@
 
 #include <cmath>
 #include <string>
+#include <any>
 #include <variant>
 #include <vector>
 #include <array>
@@ -17,3 +18,4 @@
 
 using std::shared_ptr;
 using std::make_shared;
+using UICoord = std::variant<std::vector<int>, std::vector<std::vector<int>> >;

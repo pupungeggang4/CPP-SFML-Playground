@@ -1,6 +1,7 @@
 #pragma once
 #include "general.hpp"
 
+class Res;
 class UI;
 
 class Adventure;
@@ -19,7 +20,7 @@ class Game;
 
 class UI {
     public:
-        static std::unordered_map<std::string, std::vector<int>> title;
+        static std::unordered_map<std::string, std::any> title;
         static std::unordered_map<std::string, std::vector<int>> village;
         static std::unordered_map<std::string, std::vector<int>> battle;
         static std::unordered_map<std::string, std::vector<int>> menu;
@@ -27,8 +28,9 @@ class UI {
 
 class Render {
     public:
-        static void renderText(sf::RenderWindow& window, sf::Text rText, std::string text, std::vector<float> pos);
-        static void strokeRect(sf::RenderWindow& window, sf::RectangleShape rRect, std::vector<float> rect);
+        static void fillText(sf::RenderWindow& window, sf::Text rText, std::string text, std::any pos);
+        static void strokeRect(sf::RenderWindow& window, sf::RectangleShape rRect, std::any rect);
+        static void drawTexture(sf::RenderWindow& window, sf::Texture texture, sf::Sprite sprite, std::any pos);
 };
 
 class Func {
@@ -37,7 +39,11 @@ class Func {
 };
 
 class SceneTitle {
-
+    public:
+        static void loop(shared_ptr<Game> game);
+        static void render(shared_ptr<Game> game);
+        static void keyDown(shared_ptr<Game> game, int key);
+        static void keyUp(shared_ptr<Game> game, int key);
 };
 
 class SceneVillage {
@@ -48,11 +54,24 @@ class SceneBattle {
     
 };
 
+class Res {
+    public:
+        static sf::Font neodgm;
+        static sf::Texture arrow;
+};
+
 class Game {
     public:
         sf::RenderWindow window;
         unsigned int width, height;
-        sf::Text rText; sf::RectangleShape rRect; sf::Font neodgm;
+        sf::Text rText = sf::Text(Res::neodgm);
+        sf::RectangleShape rRect;
+        sf::RenderTexture rt = sf::RenderTexture({1280, 720});
+        sf::Texture texture;
+        sf::Sprite sprite = sf::Sprite(texture);
+        std::string scene, state;
+        bool menu;
+
         Game();
         void run(shared_ptr<Game> game);
         void handleScene(shared_ptr<Game> game);
