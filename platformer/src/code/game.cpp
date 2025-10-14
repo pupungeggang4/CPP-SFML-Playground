@@ -16,6 +16,9 @@ Game::Game() {
     window.setFramerateLimit(60);
     sf::View view({640, 360}, {1280, 720});
     window.setView(view);
+
+    neodgm.setSmooth(false);
+    tex.insert(std::make_pair("arrow", sf::Texture("image/arrow.png")));
 }
 
 void Game::run(shared_ptr<Game> game) {
@@ -33,10 +36,18 @@ void Game::handleInput(shared_ptr<Game> game) {
 
         if (const auto *keyPressed = event->getIf<sf::Event::KeyPressed>()) {
             int key = int(keyPressed->scancode);
+            
+            if (scene == "title") {
+                SceneTitle::keyDown(game, key);
+            }
         }
 
         if (const auto *keyReleased = event->getIf<sf::Event::KeyReleased>()) {
+            int key = int(keyReleased->scancode);
 
+            if (scene == "title") {
+                SceneTitle::keyUp(game, key);
+            }
         }
 
         if (const auto *mouseReleased = event->getIf<sf::Event::MouseButtonReleased>()) {
@@ -44,11 +55,10 @@ void Game::handleInput(shared_ptr<Game> game) {
             std::cout << pos.x << "," << pos.y << std::endl;
         }
     }
-
-    game->window.clear();
-    game->window.display();
 }
 
 void Game::handleScene(shared_ptr<Game> game) {
-
+    if (game->scene == "title") {
+        SceneTitle::loop(game);
+    }
 }

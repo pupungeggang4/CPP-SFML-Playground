@@ -21,3 +21,8 @@ using std::make_shared;
 #define K_RIGHT 86
 #define K_DOWN 88
 #define K_UP 89
+#define K_RETURN 36
+#define K_SPACE 40
+#define K_ESCAPE 37
+
+using UICoord = std::variant<std::vector<int>, std::vector<std::vector<int>>>;
