@@ -3,6 +3,7 @@
 
 class UI;
 class Data;
+class Res;
 
 class Field;
 class Entity;
@@ -24,6 +25,12 @@ class UI {
 
 class Data {
     
+};
+
+class Res {
+    public:
+        static sf::Font neodgm;
+        static void loadFont();
 };
 
 class Field {
@@ -66,10 +73,10 @@ class Game {
     public:
         unsigned int width, height;
         sf::RenderWindow window;
-        sf::Font neodgm = sf::Font("font/neodgm.ttf");
         std::unordered_map<std::string, sf::Texture> tex;
         sf::RectangleShape rRect;
-        sf::Text rText = sf::Text(neodgm, "", 32);
+        sf::Font f = sf::Font();
+        sf::Text rText = sf::Text(f, "", 32);
         sf::Texture t = sf::Texture(); sf::Sprite sprite = sf::Sprite(t);
 
         std::string scene = "title";

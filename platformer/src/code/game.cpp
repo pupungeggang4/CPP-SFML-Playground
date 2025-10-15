@@ -9,7 +9,7 @@ Game::Game() {
     } else if (videoMode.size.x > 2000) {
         width = 1920; height = 1080;
     } else {
-        width = 1080; height = 720;
+        width = 1280; height = 720;
     }
 
     window = sf::RenderWindow(sf::VideoMode({width, height}), "Auto Card Battle");
@@ -17,7 +17,8 @@ Game::Game() {
     sf::View view({640, 360}, {1280, 720});
     window.setView(view);
 
-    neodgm.setSmooth(false);
+    Res::loadFont();
+    rText.setFont(Res::neodgm);
     tex.insert(std::make_pair("arrow", sf::Texture("image/arrow.png")));
 }
 
@@ -39,6 +40,8 @@ void Game::handleInput(shared_ptr<Game> game) {
             
             if (scene == "title") {
                 SceneTitle::keyDown(game, key);
+            } else if (scene == "field") {
+                SceneField::keyDown(game, key);
             }
         }
 
@@ -47,6 +50,8 @@ void Game::handleInput(shared_ptr<Game> game) {
 
             if (scene == "title") {
                 SceneTitle::keyUp(game, key);
+            } else if (scene == "field") {
+                SceneField::keyUp(game, key);
             }
         }
 
@@ -60,5 +65,7 @@ void Game::handleInput(shared_ptr<Game> game) {
 void Game::handleScene(shared_ptr<Game> game) {
     if (game->scene == "title") {
         SceneTitle::loop(game);
+    } else if (game->scene == "field") {
+        SceneField::loop(game);
     }
 }
