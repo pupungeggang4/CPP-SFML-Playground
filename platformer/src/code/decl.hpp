@@ -3,7 +3,7 @@
 
 class UI;
 class Data;
-class Res;
+class Locale;
 
 class Field;
 class Entity;
@@ -21,16 +21,17 @@ class UI {
         static std::unordered_map<std::string, std::vector<int>> title;
         static std::vector<std::vector<int>> titleArrow;
         static std::unordered_map<std::string, std::vector<int>> field;
+        static std::unordered_map<std::string, std::vector<int>> menu;
+        static std::vector<std::vector<int>> menuArrow;
+};
+
+class Locale {
+    public:
+        static LocaleForm data;
 };
 
 class Data {
     
-};
-
-class Res {
-    public:
-        static sf::Font neodgm;
-        static void loadFont();
 };
 
 class Field {
@@ -48,9 +49,10 @@ class Unit {
 class Render {
     public:
         static void init(shared_ptr<Game>);
-        static void strokeRect(sf::RenderWindow&, sf::RectangleShape, std::vector<int>);
-        static void fillText(sf::RenderWindow&, sf::Text, std::string, std::vector<int>);
+        static void drawRect(sf::RenderWindow&, sf::RectangleShape, std::vector<int>, float);
+        static void fillText(sf::RenderWindow&, sf::Text, sf::String, std::vector<int>);
         static void drawImage(sf::RenderWindow&, sf::Sprite, sf::Texture, std::vector<int>);
+        static void renderMenu(sf::RenderWindow&, shared_ptr<Game>);
 };
 
 class SceneTitle {
@@ -75,14 +77,18 @@ class Game {
         sf::RenderWindow window;
         std::unordered_map<std::string, sf::Texture> tex;
         sf::RectangleShape rRect;
-        sf::Font f = sf::Font();
-        sf::Text rText = sf::Text(f, "", 32);
+        sf::Font neodgm = sf::Font("font/neodgm.ttf");
+        sf::Text rText = sf::Text(neodgm, "", 32);
         sf::Texture t = sf::Texture(); sf::Sprite sprite = sf::Sprite(t);
 
         std::string scene = "title";
         std::string state = "";
+        bool menu = false;
+        std::string lang = "en";
+        std::unordered_map<std::string, sf::String> locale;
 
         int selectedTitle = 0;
+        int selectedMenu = 0;
 
         Game();
         void run(shared_ptr<Game>);

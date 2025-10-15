@@ -26,3 +26,4 @@ using std::make_shared;
 #define K_ESCAPE 37
 
 using UICoord = std::variant<std::vector<int>, std::vector<std::vector<int>>>;
+using LocaleForm = std::unordered_map<std::string, std::unordered_map<std::string, sf::String>>;

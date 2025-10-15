@@ -17,8 +17,7 @@ Game::Game() {
     sf::View view({640, 360}, {1280, 720});
     window.setView(view);
 
-    Res::loadFont();
-    rText.setFont(Res::neodgm);
+    locale = Locale::data[lang];
     tex.insert(std::make_pair("arrow", sf::Texture("image/arrow.png")));
 }
 
