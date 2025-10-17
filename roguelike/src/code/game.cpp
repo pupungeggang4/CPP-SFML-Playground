@@ -23,16 +23,12 @@ Game::Game() {
 
     loadFont();
     loadImage();
+    locale = Locale::data[lang];
 
     rText = sf::Text(neodgm, "", 32);
     rText.setFillColor(sf::Color::Black);
     rRect.setOutlineThickness(2);
     rRect.setOutlineColor(sf::Color::Black);
-
-    scene = "title";
-    state = "";
-    menu = false;
-    selectedTitle = 0;
 }
 
 void Game::run(shared_ptr<Game> game) {

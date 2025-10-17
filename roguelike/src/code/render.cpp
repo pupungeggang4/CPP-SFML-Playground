@@ -2,7 +2,7 @@
 #include "general.hpp"
 #include "decl.hpp"
 
-void Render::fillText(sf::RenderWindow& window, sf::Text rText, std::string text, std::vector<int> pos) {
+void Render::fillText(sf::RenderWindow& window, sf::Text rText, sf::String text, std::vector<int> pos) {
     rText.setString(text);
     rText.setPosition({float(pos[0]), float(pos[1])});
     window.draw(rText);
