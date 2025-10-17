@@ -19,6 +19,13 @@ Game::Game() {
 
     locale = Locale::data[lang];
     tex.insert(std::make_pair("arrow", sf::Texture("image/arrow.png")));
+    tex.insert(std::make_pair("player", sf::Texture("image/player.png")));
+
+    field = make_shared<Field>();
+
+    frameCurrent = 0;
+    framePrevious = clock.getElapsedTime().asSeconds();
+    delta = 0.016;
 }
 
 void Game::run(shared_ptr<Game> game) {
@@ -34,8 +41,21 @@ void Game::handleInput(shared_ptr<Game> game) {
             game->window.close();
         }
 
-        if (const auto *keyPressed = event->getIf<sf::Event::KeyPressed>()) {
-            int key = int(keyPressed->scancode);
+        if (const auto *keyPress = event->getIf<sf::Event::KeyPressed>()) {
+            int key = int(keyPress->scancode);
+
+            if (key == K_LEFT) {
+                keyPressed["left"] = true;
+            }
+            if (key == K_RIGHT) {
+                keyPressed["right"] = true;
+            }
+            if (key == K_UP) {
+                keyPressed["up"] = true;
+            }
+            if (key == K_DOWN) {
+                keyPressed["down"] = true;
+            }
             
             if (scene == "title") {
                 SceneTitle::keyDown(game, key);
@@ -44,8 +64,21 @@ void Game::handleInput(shared_ptr<Game> game) {
             }
         }
 
-        if (const auto *keyReleased = event->getIf<sf::Event::KeyReleased>()) {
-            int key = int(keyReleased->scancode);
+        if (const auto *keyRelease = event->getIf<sf::Event::KeyReleased>()) {
+            int key = int(keyRelease->scancode);
+
+            if (key == K_LEFT) {
+                keyPressed["left"] = false;
+            }
+            if (key == K_RIGHT) {
+                keyPressed["right"] = false;
+            }
+            if (key == K_UP) {
+                keyPressed["up"] = false;
+            }
+            if (key == K_DOWN) {
+                keyPressed["down"] = false;
+            }
 
             if (scene == "title") {
                 SceneTitle::keyUp(game, key);
@@ -62,6 +95,10 @@ void Game::handleInput(shared_ptr<Game> game) {
 }
 
 void Game::handleScene(shared_ptr<Game> game) {
+    frameCurrent = clock.getElapsedTime().asSeconds();
+    delta = frameCurrent - framePrevious;
+    framePrevious = clock.getElapsedTime().asSeconds();
+
     if (game->scene == "title") {
         SceneTitle::loop(game);
     } else if (game->scene == "field") {

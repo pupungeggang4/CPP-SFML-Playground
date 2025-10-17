@@ -2,6 +2,11 @@
 #include "decl.hpp"
 
 void SceneField::loop(shared_ptr<Game> game) {
+    if (game->menu == false) {
+        if (game->state == "") {
+            game->field->handleTick(game->field, game);
+        }
+    }
     render(game);
 }
 
@@ -11,6 +16,7 @@ void SceneField::render(shared_ptr<Game> game) {
     if (game->menu == true) {
         Render::renderMenu(game->window, game);
     }
+    game->field->render(game->window, game->field, game);
     game->window.display();
 }
 

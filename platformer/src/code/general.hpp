@@ -16,6 +16,7 @@
 
 using std::shared_ptr;
 using std::make_shared;
+using std::enable_shared_from_this;
 
 #define K_LEFT 87
 #define K_RIGHT 86
