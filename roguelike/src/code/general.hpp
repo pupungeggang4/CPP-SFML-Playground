@@ -24,3 +24,5 @@ using std::make_shared;
 #define K_DOWN 88
 #define K_UP 89
 #define K_RETURN 36
+#define K_ESCAPE 37
+#define K_SPACE 40

@@ -41,6 +41,8 @@ void Game::run(shared_ptr<Game> game) {
 void Game::handleScene(shared_ptr<Game> game) {
     if (game->scene == "title") {
         SceneTitle::loop(game);
+    } else if (game->scene == "village") {
+        SceneVillage::loop(game);
     }
 }
 
@@ -50,15 +52,22 @@ void Game::handleInput(shared_ptr<Game> game) {
             window.close();
         }
 
-        if (const auto *keyPressed = event->getIf<sf::Event::KeyPressed>()) {
-            int key = int(keyPressed->scancode);
+        if (const auto *keyPress = event->getIf<sf::Event::KeyPressed>()) {
+            int key = int(keyPress->scancode);
             if (game->scene == "title") {
                 SceneTitle::keyDown(game, key);
+            } else if (game->scene == "village") {
+                SceneVillage::keyDown(game, key);
             }
         }
 
-        if (const auto *keyReleased = event->getIf<sf::Event::KeyReleased>()) {
-
+        if (const auto *keyRelease = event->getIf<sf::Event::KeyReleased>()) {
+            int key = int(keyRelease->scancode);
+            if (game->scene == "title") {
+                SceneTitle::keyUp(game, key);
+            } else if (game->scene == "village") {
+                SceneVillage::keyUp(game, key);
+            }
         }
     }
 }

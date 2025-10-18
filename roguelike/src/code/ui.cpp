@@ -16,3 +16,15 @@ std::unordered_map<std::string, std::vector<int>> UI::title = {
     {"text_exit", {180, 500}},
 };
 std::vector<std::vector<int>> UI::titleArrow = {{80, 160}, {80, 240}, {80, 320}, {80, 400}, {80, 480}};
+
+std::unordered_map<std::string, std::vector<int>> UI::menuVillage = {
+    {"rect", {320, 200, 640, 320}},
+    {"text_paused", {340, 220}},
+    {"button_resume", {320, 280, 640, 80}},
+    {"text_resume", {340, 300}},
+    {"button_exit", {320, 360, 640, 80}},
+    {"text_exit", {340, 380}},
+    {"button_quit", {320, 440, 640, 80}},
+    {"text_quit", {340, 460}}
+};
+std::vector<std::vector<int>> UI::menuVillageArrow = {{240, 280}, {240, 360}, {240, 440}};

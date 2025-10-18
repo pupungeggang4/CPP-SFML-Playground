@@ -24,7 +24,8 @@ class UI {
         static std::vector<std::vector<int>> titleArrow;
         static std::unordered_map<std::string, std::vector<int>> village;
         static std::unordered_map<std::string, std::vector<int>> battle;
-        static std::unordered_map<std::string, std::vector<int>> menu;
+        static std::unordered_map<std::string, std::vector<int>> menuVillage;
+        static std::vector<std::vector<int>> menuVillageArrow;
 };
 
 class Locale {
@@ -34,26 +35,32 @@ class Locale {
 
 class Render {
     public:
-        static void fillText(sf::RenderWindow& window, sf::Text rText, sf::String text, std::vector<int> pos);
-        static void strokeRect(sf::RenderWindow& window, sf::RectangleShape rRect, std::vector<int> rect);
-        static void drawTexture(sf::RenderWindow& window, sf::Texture texture, sf::Sprite sprite, std::vector<int> pos);
+        static void renderInit(shared_ptr<Game>);
+        static void renderMenu(sf::RenderWindow&, shared_ptr<Game>);
+        static void fillText(sf::RenderTarget&, sf::Text, sf::String, std::vector<int>);
+        static void drawRect(sf::RenderTarget&, sf::RectangleShape, std::vector<int>, float);
+        static void drawTexture(sf::RenderTarget&, sf::Sprite, sf::Texture, std::vector<int>);
 };
 
 class Func {
     public:
-        static bool pointInsideRectUI(sf::Vector2i pos, sf::IntRect rect);
+        static bool pointInsideRectUI(sf::Vector2i, sf::IntRect);
 };
 
 class SceneTitle {
     public:
-        static void loop(shared_ptr<Game> game);
-        static void render(shared_ptr<Game> game);
-        static void keyDown(shared_ptr<Game> game, int key);
-        static void keyUp(shared_ptr<Game> game, int key);
+        static void loop(shared_ptr<Game>);
+        static void render(shared_ptr<Game>);
+        static void keyDown(shared_ptr<Game>, int);
+        static void keyUp(shared_ptr<Game>, int);
 };
 
 class SceneVillage {
-
+    public:
+        static void loop(shared_ptr<Game>);
+        static void render(shared_ptr<Game>);
+        static void keyDown(shared_ptr<Game>, int);
+        static void keyUp(shared_ptr<Game>, int);
 };
 
 class SceneBattle {
@@ -73,7 +80,7 @@ class Game {
 
         std::string scene = "title", state = "";
         bool menu = false;
-        int selectedTitle = 0;
+        int selectedTitle = 0, selectedMenuVillage = 0, selectedAdventureConfirm = 0, selectedMenuBattle = 0;
 
         std::string lang = "en";
         std::unordered_map<std::string, sf::String> locale;
@@ -81,7 +88,7 @@ class Game {
         Game();
         void loadFont();
         void loadImage();
-        void run(shared_ptr<Game> game);
-        void handleScene(shared_ptr<Game> game);
-        void handleInput(shared_ptr<Game> game);
+        void run(shared_ptr<Game>);
+        void handleScene(shared_ptr<Game>);
+        void handleInput(shared_ptr<Game>);
 };
