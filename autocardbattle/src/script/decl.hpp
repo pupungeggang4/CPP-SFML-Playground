@@ -16,6 +16,7 @@ class Func;
 class SceneTitle;
 class SceneReady;
 class SceneBattle;
+class SceneCollection;
 
 class UI {
     public:
@@ -59,6 +60,9 @@ class Game {
         std::string scene = "title", state = ""; bool menu = false;
         Game();
         void run(shared_ptr<Game>);
+
+        void handleScene(shared_ptr<Game>);
+        void handleInput(shared_ptr<Game>);
 };
 
 class Battle {
@@ -87,6 +91,13 @@ class SceneReady {
 };
 
 class SceneBattle {
+    public:
+        static void loop(shared_ptr<Game>);
+        static void render(shared_ptr<Game>);
+        static void mouseUp(shared_ptr<Game>, sf::Vector2f);
+};
+
+class SceneCollection {
     public:
         static void loop(shared_ptr<Game>);
         static void render(shared_ptr<Game>);

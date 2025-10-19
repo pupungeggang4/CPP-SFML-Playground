@@ -24,6 +24,8 @@ void SceneTitle::render(shared_ptr<Game> game) {
 void SceneTitle::mouseUp(shared_ptr<Game> game, sf::Vector2f pos) {
     if (Func::pointInsideRectUI(pos, UI::title["button_start"])) {
         game->scene = "ready";
+    } else if (Func::pointInsideRectUI(pos, UI::title["button_collection"])) {
+        game->scene = "collection";
     } else if (Func::pointInsideRectUI(pos, UI::title["button_exit"])) {
         game->window.close();
     }

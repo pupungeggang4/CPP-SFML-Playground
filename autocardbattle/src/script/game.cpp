@@ -17,33 +17,41 @@ Game::Game() {
 }
 
 void Game::run(shared_ptr<Game> game) {
-    while (game->window.isOpen())
-    {
-        while (const std::optional event = game->window.pollEvent())
-        {
-            if (event->is<sf::Event::Closed>())
-            {
-                game->window.close();
-            }
+    while (game->window.isOpen()) {
+        handleInput(game);
+        handleScene(game);
+    }
+}
 
-            if (const auto *mouse = event->getIf<sf::Event::MouseButtonReleased>()) {
-                sf::Vector2f mousePos = {mouse->position.x * 1280.0f / width, mouse->position.y * 720.0f / height};
-                if (scene == "title") {
-                    SceneTitle::mouseUp(game, mousePos);
-                } else if (scene == "ready") {
-                    SceneReady::mouseUp(game, mousePos);
-                } else if (scene == "battle") {
-                    SceneBattle::mouseUp(game, mousePos);
-                }
-            }
+void Game::handleScene(shared_ptr<Game> game) {
+    if (scene == "title") {
+        SceneTitle::loop(game);
+    } else if (scene == "ready") {
+        SceneReady::loop(game);
+    } else if (scene == "battle") {
+        SceneBattle::loop(game);
+    } else if (scene == "collection") {
+        SceneCollection::loop(game);
+    }
+}
+
+void Game::handleInput(shared_ptr<Game> game) {
+    while (const std::optional event = game->window.pollEvent()) {
+        if (event->is<sf::Event::Closed>()) {
+            game->window.close();
         }
 
-        if (scene == "title") {
-            SceneTitle::loop(game);
-        } else if (scene == "ready") {
-            SceneReady::loop(game);
-        } else if (scene == "battle") {
-            SceneBattle::loop(game);
+        if (const auto *mouse = event->getIf<sf::Event::MouseButtonReleased>()) {
+            sf::Vector2f mousePos = {mouse->position.x * 1280.0f / width, mouse->position.y * 720.0f / height};
+            if (scene == "title") {
+                SceneTitle::mouseUp(game, mousePos);
+            } else if (scene == "ready") {
+                SceneReady::mouseUp(game, mousePos);
+            } else if (scene == "battle") {
+                SceneBattle::mouseUp(game, mousePos);
+            } else if (scene == "collection") {
+                SceneCollection::mouseUp(game, mousePos);
+            }
         }
     }
 }
