@@ -14,9 +14,6 @@ Game::Game() {
     window.setFramerateLimit(60);
     sf::View view({640, 360}, {1280, 720});
     window.setView(view);
-
-    scene = "title";
-    state = "";
 }
 
 void Game::run(shared_ptr<Game> game) {
@@ -33,16 +30,20 @@ void Game::run(shared_ptr<Game> game) {
                 sf::Vector2f mousePos = {mouse->position.x * 1280.0f / width, mouse->position.y * 720.0f / height};
                 if (scene == "title") {
                     SceneTitle::mouseUp(game, mousePos);
-                } else if (scene == "game") {
-
+                } else if (scene == "ready") {
+                    SceneReady::mouseUp(game, mousePos);
+                } else if (scene == "battle") {
+                    SceneBattle::mouseUp(game, mousePos);
                 }
             }
         }
 
         if (scene == "title") {
-            SceneTitle::render(game);
-        } else if (scene == "game") {
-            SceneGame::render(game);
+            SceneTitle::loop(game);
+        } else if (scene == "ready") {
+            SceneReady::loop(game);
+        } else if (scene == "battle") {
+            SceneBattle::loop(game);
         }
     }
 }

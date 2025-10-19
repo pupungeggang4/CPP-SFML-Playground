@@ -1,11 +1,7 @@
 #pragma once
 #include "general.hpp"
 
-typedef std::unordered_map<std::string, std::vector<float>> UI;
-
-extern UI UITitle;
-extern UI UIBattle;
-extern UI UICollection;
+class UI;
 
 class Card;
 class Crystal;
@@ -15,8 +11,18 @@ class Game;
 class Battle;
 
 class Render;
+class Func;
+
 class SceneTitle;
-class SceneGame;
+class SceneReady;
+class SceneBattle;
+
+class UI {
+    public:
+        static std::unordered_map<std::string, std::vector<int>> title;
+        static std::unordered_map<std::string, std::vector<int>> ready;
+        static std::unordered_map<std::string, std::vector<int>> battle;
+};
 
 class Card {
     public:
@@ -28,7 +34,7 @@ class Card {
         std::vector<shared_ptr<Crystal>> crystal;
 
         Card();
-        void setData(int ID);
+        void setData(int);
 };
 
 class Crystal {
@@ -50,9 +56,9 @@ class Game {
         sf::Text rTmpText = sf::Text(neodgm, "Hello", 32);
 
         unsigned int width, height;
-        std::string scene, state;
+        std::string scene = "title", state = ""; bool menu = false;
         Game();
-        void run(shared_ptr<Game> game);
+        void run(shared_ptr<Game>);
 };
 
 class Battle {
@@ -61,21 +67,33 @@ class Battle {
 
 class Render {
     public:
-        static void strokeRectUI(sf::RenderWindow& window, sf::RectangleShape r, std::vector<float> rect);
-        static void fillTextUI(sf::RenderWindow& window, sf::Text t, std::string text, std::vector<float> pos);
+        static void drawRect(sf::RenderTarget&, sf::RectangleShape, std::vector<int>, float);
+        static void fillText(sf::RenderTarget&, sf::Text, sf::String, std::vector<int>);
+        static void drawTexture(sf::RenderTarget&, sf::Sprite, sf::Texture, std::vector<int>);
 };
 
 class SceneTitle {
     public:
-        static void loop(shared_ptr<Game> game);
-        static void render(shared_ptr<Game> game);
-        static void mouseUp(shared_ptr<Game> game, sf::Vector2f pos);
+        static void loop(shared_ptr<Game>);
+        static void render(shared_ptr<Game>);
+        static void mouseUp(shared_ptr<Game>, sf::Vector2f);
 };
 
-class SceneGame {
+class SceneReady {
     public:
-        static void loop(shared_ptr<Game> game);
-        static void render(shared_ptr<Game> game);
+        static void loop(shared_ptr<Game>);
+        static void render(shared_ptr<Game>);
+        static void mouseUp(shared_ptr<Game>, sf::Vector2f);
 };
 
-bool pointInsideRectUI(sf::Vector2f point, std::vector<float> rect);
+class SceneBattle {
+    public:
+        static void loop(shared_ptr<Game>);
+        static void render(shared_ptr<Game>);
+        static void mouseUp(shared_ptr<Game>, sf::Vector2f);
+};
+
+class Func{
+    public:
+        static bool pointInsideRectUI(sf::Vector2f, std::vector<int>);
+};

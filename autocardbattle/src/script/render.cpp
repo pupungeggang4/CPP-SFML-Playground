@@ -1,16 +1,21 @@
 #include "general.hpp"
 #include "decl.hpp"
 
-void Render::strokeRectUI(sf::RenderWindow& window, sf::RectangleShape r, std::vector<float> rect) {
-    float thickness = r.getOutlineThickness();
-    r.setPosition({rect[0] + thickness / 2, rect[1] + thickness / 2});
-    r.setSize({rect[2], rect[3]});
-    window.draw(r);
+void Render::drawRect(sf::RenderTarget& rt, sf::RectangleShape r, std::vector<int> rect, float thickness) {
+    r.setOutlineThickness(thickness);
+    r.setPosition({float(rect[0]), float(rect[1])});
+    r.setSize({float(rect[2]), float(rect[3])});
+    rt.draw(r);
 }
 
-void Render::fillTextUI(sf::RenderWindow& window, sf::Text t, std::string text, std::vector<float> pos) {
-    float yOffset = t.getCharacterSize();
+void Render::fillText(sf::RenderTarget& rt, sf::Text t, sf::String text, std::vector<int> pos) {
     t.setString(text);
-    t.setPosition({pos[0], pos[1] - yOffset / 32 * 6});
-    window.draw(t);
+    t.setPosition({float(pos[0]), float(pos[1])});
+    rt.draw(t);
+}
+
+void Render::drawTexture(sf::RenderTarget& rt, sf::Sprite sprite, sf::Texture tex, std::vector<int> pos) {
+    sprite.setTexture(tex, true);
+    sprite.setPosition({float(pos[0]), float(pos[1])});
+    rt.draw(sprite);
 }
