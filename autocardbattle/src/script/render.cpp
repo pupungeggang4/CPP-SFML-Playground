@@ -1,6 +1,13 @@
 #include "general.hpp"
 #include "decl.hpp"
 
+void Render::init(shared_ptr<Game> game) {
+    game->rRect.setOutlineColor(sf::Color::Black);
+    game->rRect.setOutlineThickness(2.0f);
+    game->rText.setCharacterSize(32);
+    game->rText.setFillColor(sf::Color::Black);
+}
+
 void Render::drawRect(sf::RenderTarget& rt, sf::RectangleShape r, std::vector<int> rect, float thickness) {
     r.setOutlineThickness(thickness);
     r.setPosition({float(rect[0]), float(rect[1])});

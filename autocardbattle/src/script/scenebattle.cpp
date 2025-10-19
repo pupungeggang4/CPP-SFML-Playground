@@ -7,6 +7,7 @@ void SceneBattle::loop(shared_ptr<Game> game) {
 
 void SceneBattle::render(shared_ptr<Game> game) {
     game->window.clear(sf::Color::White);
+    Render::init(game);
     game->window.display();
 }
 

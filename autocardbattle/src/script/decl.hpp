@@ -23,6 +23,7 @@ class UI {
         static std::unordered_map<std::string, std::vector<int>> title;
         static std::unordered_map<std::string, std::vector<int>> ready;
         static std::unordered_map<std::string, std::vector<int>> battle;
+        static std::unordered_map<std::string, std::vector<int>> collection;
 };
 
 class Card {
@@ -49,28 +50,13 @@ class Unit {
         int hp, hpMax, attack;
 };
 
-class Game {
-    public:
-        sf::RenderWindow window;
-        sf::Font neodgm = sf::Font("font/neodgm.ttf");
-        sf::RectangleShape rTmpRect = sf::RectangleShape({0.0f, 0.0f});
-        sf::Text rTmpText = sf::Text(neodgm, "Hello", 32);
-
-        unsigned int width, height;
-        std::string scene = "title", state = ""; bool menu = false;
-        Game();
-        void run(shared_ptr<Game>);
-
-        void handleScene(shared_ptr<Game>);
-        void handleInput(shared_ptr<Game>);
-};
-
 class Battle {
 
 };
 
 class Render {
     public:
+        static void init(shared_ptr<Game>);
         static void drawRect(sf::RenderTarget&, sf::RectangleShape, std::vector<int>, float);
         static void fillText(sf::RenderTarget&, sf::Text, sf::String, std::vector<int>);
         static void drawTexture(sf::RenderTarget&, sf::Sprite, sf::Texture, std::vector<int>);
@@ -104,7 +90,23 @@ class SceneCollection {
         static void mouseUp(shared_ptr<Game>, sf::Vector2f);
 };
 
-class Func{
+class Func {
     public:
         static bool pointInsideRectUI(sf::Vector2f, std::vector<int>);
+};
+
+class Game {
+    public:
+        sf::RenderWindow window;
+        sf::Font neodgm = sf::Font("font/neodgm.ttf");
+        sf::RectangleShape rRect = sf::RectangleShape({0.0f, 0.0f});
+        sf::Text rText = sf::Text(neodgm, "Hello", 32);
+
+        unsigned int width, height;
+        std::string scene = "title", state = ""; bool menu = false;
+        Game();
+        void run(shared_ptr<Game>);
+
+        void handleScene(shared_ptr<Game>);
+        void handleInput(shared_ptr<Game>);
 };

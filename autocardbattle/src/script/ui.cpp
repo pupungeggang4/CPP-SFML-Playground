@@ -12,9 +12,13 @@ std::unordered_map<std::string, std::vector<int>> UI::title = {
 };
 
 std::unordered_map<std::string, std::vector<int>> UI::ready = {
-
+    {"button_back", {1180, 20, 80, 80}}
 };
 
 std::unordered_map<std::string, std::vector<int>> UI::battle = {
 
+};
+
+std::unordered_map<std::string, std::vector<int>> UI::collection = {
+    {"button_back", {1180, 20, 80, 80}}
 };

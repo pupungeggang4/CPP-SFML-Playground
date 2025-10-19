@@ -1,6 +1,5 @@
 #include "general.hpp"
 #include "decl.hpp"
-#include "data.hpp"
 
 Card::Card() {
     name = "";
