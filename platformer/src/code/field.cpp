@@ -1,8 +1,10 @@
 #include "general.hpp"
 #include "decl.hpp"
 
-Field::Field() {
+Field::Field(shared_ptr<Game> game) {
     player = make_shared<FieldPlayer>();
+    shared_ptr<Entity> e = make_shared<Coin>(game);
+    entityList.push_back(e);
 }
 
 void Field::handleTick(shared_ptr<Field> field, shared_ptr<Game> game) {
@@ -11,6 +13,7 @@ void Field::handleTick(shared_ptr<Field> field, shared_ptr<Game> game) {
 
 void Field::render(sf::RenderTarget& rt, shared_ptr<Field> field, shared_ptr<Game> game) {
     player->render(rt, field, game);
+    entityList[0]->render(rt, field, game);
 }
 
 FieldPlayer::FieldPlayer() {

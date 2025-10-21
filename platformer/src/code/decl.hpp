@@ -7,6 +7,7 @@ class Locale;
 
 class Field;
 class Entity;
+class Coin;
 class Unit;
 class FieldPlayer;
 
@@ -39,14 +40,35 @@ class Field : public enable_shared_from_this<Field> {
     public:
         shared_ptr<FieldPlayer> player;
         sf::FloatRect cam = {{0.0, 0.0}, {1280.0, 720.0}};
+        std::vector<shared_ptr<Entity>> entityList = {};
 
-        Field();
+        Field(shared_ptr<Game>);
         void handleTick(shared_ptr<Field>, shared_ptr<Game>);
         void render(sf::RenderTarget&, shared_ptr<Field>, shared_ptr<Game>);
 };
 
 class Entity {
+    public:
+        sf::RenderTexture rTex = sf::RenderTexture({40, 40});
+        sf::FloatRect rect;
+        sf::Texture tex;
+        shared_ptr<sf::Texture> texTarget;
+        sf::Sprite sprite = sf::Sprite(tex), spriteOut = sf::Sprite(tex);
 
+        std::vector<sf::IntRect> frameCoord = {};
+        int frames = 0, frameCurrent = 0;
+        float frameInterval = 0, frameTime = 0;
+
+        Entity(shared_ptr<Game>);
+        void render(sf::RenderTarget&, shared_ptr<Field>, shared_ptr<Game>);
+        void drawThis(sf::RenderTarget&, sf::Texture, shared_ptr<Field>, shared_ptr<Game>);
+};
+
+class Coin : public Entity {
+    public:
+        Coin(shared_ptr<Game>);
+        //void render(sf::RenderTarget&, shared_ptr<Field>, shared_ptr<Game>);
+        //void drawThis(sf::RenderTarget&, shared_ptr<Field>, shared_ptr<Game>);
 };
 
 class Unit {
@@ -120,6 +142,7 @@ class Game {
         shared_ptr<Field> field;
 
         Game();
+        void init(shared_ptr<Game>);
         void run(shared_ptr<Game>);
         void handleInput(shared_ptr<Game>);
         void handleScene(shared_ptr<Game>);

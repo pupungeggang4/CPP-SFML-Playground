@@ -3,7 +3,7 @@
 
 int main() {
     shared_ptr<Game> game = make_shared<Game>();
+    game->init(game);
     game->run(game);
-    game.reset();
     return 0;
 }
