@@ -2,6 +2,8 @@
 #include "decl.hpp"
 
 Game::Game() {
+    std::srand(std::time(0));
+
     sf::err().rdbuf(NULL);
     sf::VideoMode videoMode = sf::VideoMode::getDesktopMode();
     if (videoMode.size.x > 2560) {
@@ -28,6 +30,8 @@ Game::Game() {
     rText.setFillColor(sf::Color::Black);
     rRect.setOutlineThickness(2);
     rRect.setOutlineColor(sf::Color::Black);
+
+    field = make_shared<Field>();
 }
 
 void Game::run(shared_ptr<Game> game) {

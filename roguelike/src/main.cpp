@@ -1,3 +1,4 @@
+#include "code/general.hpp"
 #include "code/decl.hpp"
 
 int main(int argc, char* argv[]) {

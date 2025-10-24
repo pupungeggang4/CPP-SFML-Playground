@@ -3,12 +3,19 @@
 #include "decl.hpp"
 
 void SceneVillage::loop(shared_ptr<Game> game) {
+    if (game->menu == false) {
+        if (game->state == "") {
+            game->field->handleTick(game);
+        }
+    }
     render(game);
 }
 
 void SceneVillage::render(shared_ptr<Game> game) {
     game->window.clear(sf::Color::White);
     Render::renderInit(game);
+
+    game->field->render(game);
 
     if (game->menu == true) {
         Render::renderMenu(game);

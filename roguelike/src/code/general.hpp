@@ -1,7 +1,8 @@
 #pragma once
 
 #include <iostream>
-
+#include <cstdlib>
+#include <ctime>
 #include <cmath>
 #include <string>
 #include <any>
