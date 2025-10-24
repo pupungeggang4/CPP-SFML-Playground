@@ -11,7 +11,7 @@ void SceneVillage::render(shared_ptr<Game> game) {
     Render::renderInit(game);
 
     if (game->menu == true) {
-        Render::renderMenu(game->window, game);
+        Render::renderMenu(game);
     }
     game->window.display();
 }

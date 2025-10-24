@@ -7,17 +7,17 @@ void Render::renderInit(shared_ptr<Game> game) {
     game->rText.setFillColor(sf::Color::Black);
 }
 
-void Render::renderMenu(sf::RenderWindow& window, shared_ptr<Game> game) {
-    drawRect(window, game->rRect, UI::menuVillage["rect"], 2);
-    drawRect(window, game->rRect, UI::menuVillage["rect"], 2);
-    fillText(window, game->rText, game->locale["paused"], UI::menuVillage["text_paused"]);
-    drawRect(window, game->rRect, UI::menuVillage["button_resume"], 2);
-    fillText(window, game->rText, game->locale["resume"], UI::menuVillage["text_resume"]);
-    drawRect(window, game->rRect, UI::menuVillage["button_exit"], 2);
-    fillText(window, game->rText, game->locale["to_title"], UI::menuVillage["text_exit"]);
-    drawRect(window, game->rRect, UI::menuVillage["button_quit"], 2);
-    fillText(window, game->rText, game->locale["exit"], UI::menuVillage["text_quit"]);
-    drawTexture(window, game->sprite, game->tex["arrow"], UI::menuVillageArrow[game->selectedMenuVillage]);
+void Render::renderMenu(shared_ptr<Game> game) {
+    drawRect(game->window, game->rRect, UI::menuVillage["rect"], 2);
+    drawRect(game->window, game->rRect, UI::menuVillage["rect"], 2);
+    fillText(game->window, game->rText, game->locale["paused"], UI::menuVillage["text_paused"]);
+    drawRect(game->window, game->rRect, UI::menuVillage["button_resume"], 2);
+    fillText(game->window, game->rText, game->locale["resume"], UI::menuVillage["text_resume"]);
+    drawRect(game->window, game->rRect, UI::menuVillage["button_exit"], 2);
+    fillText(game->window, game->rText, game->locale["to_title"], UI::menuVillage["text_exit"]);
+    drawRect(game->window, game->rRect, UI::menuVillage["button_quit"], 2);
+    fillText(game->window, game->rText, game->locale["exit"], UI::menuVillage["text_quit"]);
+    drawTexture(game->window, game->sprite, game->tex["arrow"], UI::menuVillageArrow[game->selectedMenuVillage]);
 }
 
 void Render::fillText(sf::RenderTarget& rt, sf::Text rText, sf::String text, std::vector<int> pos) {

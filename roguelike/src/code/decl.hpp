@@ -36,7 +36,7 @@ class Locale {
 class Render {
     public:
         static void renderInit(shared_ptr<Game>);
-        static void renderMenu(sf::RenderWindow&, shared_ptr<Game>);
+        static void renderMenu(shared_ptr<Game>);
         static void fillText(sf::RenderTarget&, sf::Text, sf::String, std::vector<int>);
         static void drawRect(sf::RenderTarget&, sf::RectangleShape, std::vector<int>, float);
         static void drawTexture(sf::RenderTarget&, sf::Sprite, sf::Texture, std::vector<int>);
@@ -64,7 +64,11 @@ class SceneVillage {
 };
 
 class SceneBattle {
-    
+    public:
+        static void loop(shared_ptr<Game>);
+        static void render(shared_ptr<Game>);
+        static void keyDown(shared_ptr<Game>, int);
+        static void keyUp(shared_ptr<Game, int);
 };
 
 class Game {
@@ -86,6 +90,7 @@ class Game {
         std::unordered_map<std::string, sf::String> locale;
 
         Game();
+        void init(shared_ptr<Game>);
         void loadFont();
         void loadImage();
         void run(shared_ptr<Game>);

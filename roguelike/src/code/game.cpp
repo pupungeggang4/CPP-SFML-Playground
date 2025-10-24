@@ -1,4 +1,3 @@
-#pragma once
 #include "general.hpp"
 #include "decl.hpp"
 
@@ -72,6 +71,10 @@ void Game::handleInput(shared_ptr<Game> game) {
     }
 }
 
+void Game::init(shared_ptr<Game> game) {
+
+}
+
 void Game::loadFont() {
     neodgm = sf::Font("font/neodgm.ttf");
     neodgm.setSmooth(false);
@@ -79,4 +82,6 @@ void Game::loadFont() {
 
 void Game::loadImage() {
     tex.emplace("arrow", sf::Texture("image/arrow.png"));
+    tex.emplace("player", sf::Texture("image/player.png"));
+    tex.emplace("portal", sf::Texture("image/portal.png"));
 }
