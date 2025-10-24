@@ -32,6 +32,7 @@ Game::Game() {
     rRect.setOutlineColor(sf::Color::Black);
 
     field = make_shared<Field>();
+    village = make_shared<Village>();
 }
 
 void Game::run(shared_ptr<Game> game) {
@@ -57,6 +58,18 @@ void Game::handleInput(shared_ptr<Game> game) {
 
         if (const auto *keyPress = event->getIf<sf::Event::KeyPressed>()) {
             int key = int(keyPress->scancode);
+            if (key == K_LEFT) {
+                keyPressed["left"] = true;
+            }
+            if (key == K_RIGHT) {
+                keyPressed["right"] = true;
+            }
+            if (key == K_UP) {
+                keyPressed["up"] = true;
+            }
+            if (key == K_DOWN) {
+                keyPressed["down"] = true;
+            }
             if (game->scene == "title") {
                 SceneTitle::keyDown(game, key);
             } else if (game->scene == "village") {
@@ -66,6 +79,18 @@ void Game::handleInput(shared_ptr<Game> game) {
 
         if (const auto *keyRelease = event->getIf<sf::Event::KeyReleased>()) {
             int key = int(keyRelease->scancode);
+            if (key == K_LEFT) {
+                keyPressed["left"] = false;
+            }
+            if (key == K_RIGHT) {
+                keyPressed["right"] = false;
+            }
+            if (key == K_UP) {
+                keyPressed["up"] = false;
+            }
+            if (key == K_DOWN) {
+                keyPressed["down"] = false;
+            }
             if (game->scene == "title") {
                 SceneTitle::keyUp(game, key);
             } else if (game->scene == "village") {

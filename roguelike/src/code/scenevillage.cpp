@@ -5,7 +5,7 @@
 void SceneVillage::loop(shared_ptr<Game> game) {
     if (game->menu == false) {
         if (game->state == "") {
-            game->field->handleTick(game);
+            game->village->handleTick(game);
         }
     }
     render(game);
@@ -15,10 +15,10 @@ void SceneVillage::render(shared_ptr<Game> game) {
     game->window.clear(sf::Color::White);
     Render::renderInit(game);
 
-    game->field->render(game);
+    game->village->render(game);
 
     if (game->menu == true) {
-        Render::renderMenu(game);
+        Render::renderMenuVillage(game);
     }
     game->window.display();
 }

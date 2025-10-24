@@ -5,6 +5,12 @@ class UI;
 class Locale;
 
 class Adventure;
+
+class Village;
+class VillagePlayer;
+class VillageEntity;
+class VillagePortal;
+
 class Field;
 class Entity;
 class FieldPlayer;
@@ -35,6 +41,43 @@ class UI {
 class Locale {
     public:
         static std::unordered_map<std::string, std::unordered_map<std::string, sf::String>> data;
+};
+
+class Village {
+    public:
+        sf::FloatRect camera = {{0, 0}, {1280, 720}};
+        shared_ptr<VillagePlayer> player;
+        shared_ptr<VillagePortal> portalBattle;
+
+        Village();
+        void handleTick(shared_ptr<Game>);
+        void render(shared_ptr<Game>);
+};
+
+class VillagePlayer {
+    public:
+        sf::FloatRect rect = {{0, 0}, {80, 80}};
+        sf::RenderTexture rt;
+        sf::Texture t;
+        sf::Sprite sprite = sf::Sprite(t), spriteOut = sf::Sprite(t);
+
+        float speed = 320.0f;
+
+        VillagePlayer();
+        void handleTick(shared_ptr<Game>);
+        void render(shared_ptr<Game>);
+        void interact(shared_ptr<Game>);
+};
+
+class VillagePortal {
+    public:
+        sf::FloatRect rect = {{0, -200}, {80, 80}};
+        sf::RenderTexture rt;
+        sf::Texture t;
+        sf::Sprite sprite = sf::Sprite(t), spriteOut = sf::Sprite(t);
+
+        VillagePortal();
+        void render(shared_ptr<Game>);
 };
 
 class Field {
@@ -89,10 +132,11 @@ class Projectile : public Entity {
 class Render {
     public:
         static void renderInit(shared_ptr<Game>);
-        static void renderMenu(shared_ptr<Game>);
+        static void renderMenuVillage(shared_ptr<Game>);
         static void fillText(sf::RenderTarget&, sf::Text, sf::String, std::vector<int>);
         static void drawRect(sf::RenderTarget&, sf::RectangleShape, std::vector<int>, float);
         static void drawTexture(sf::RenderTarget&, sf::Sprite, sf::Texture, std::vector<int>);
+        static void drawCenterCam(sf::RenderTarget&, sf::Sprite, sf::FloatRect, sf::FloatRect);
 };
 
 class Func {
@@ -140,8 +184,12 @@ class Game {
         int selectedTitle = 0, selectedMenuVillage = 0, selectedAdventureConfirm = 0, selectedMenuBattle = 0;
         std::string lang = "en";
         std::unordered_map<std::string, sf::String> locale;
+        std::unordered_map<std::string, bool> keyPressed = {
+            {"left", false}, {"right", false}, {"up", false}, {"down", false}
+        };
 
         shared_ptr<Field> field;
+        shared_ptr<Village> village;
 
         Game();
         void init(shared_ptr<Game>);

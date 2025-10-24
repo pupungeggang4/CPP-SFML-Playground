@@ -7,7 +7,7 @@ void Render::renderInit(shared_ptr<Game> game) {
     game->rText.setFillColor(sf::Color::Black);
 }
 
-void Render::renderMenu(shared_ptr<Game> game) {
+void Render::renderMenuVillage(shared_ptr<Game> game) {
     drawRect(game->window, game->rRect, UI::menuVillage["rect"], 2);
     drawRect(game->window, game->rRect, UI::menuVillage["rect"], 2);
     fillText(game->window, game->rText, game->locale["paused"], UI::menuVillage["text_paused"]);
@@ -36,5 +36,11 @@ void Render::drawRect(sf::RenderTarget& rt, sf::RectangleShape rRect, std::vecto
 void Render::drawTexture(sf::RenderTarget& rt, sf::Sprite sprite, sf::Texture texture, std::vector<int> pos) {
     sprite.setTexture(texture, true);
     sprite.setPosition({float(pos[0]), float(pos[1])});
+    rt.draw(sprite);
+}
+
+void Render::drawCenterCam(sf::RenderTarget& rt, sf::Sprite sprite, sf::FloatRect rect, sf::FloatRect cam) {
+    sf::Vector2f pos = rect.position - rect.size / 2.0f - cam.position + cam.size / 2.0f;
+    sprite.setPosition(pos);
     rt.draw(sprite);
 }

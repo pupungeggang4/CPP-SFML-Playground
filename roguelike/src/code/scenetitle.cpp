@@ -32,6 +32,7 @@ void SceneTitle::keyDown(shared_ptr<Game> game, int key) {
         if (game->selectedTitle == 0) {
             game->scene = "village";
             game->state = "";
+            game->village = make_shared<Village>();
         } else if (game->selectedTitle == 1) {
 
         } else if (game->selectedTitle == 2) {
@@ -40,7 +41,6 @@ void SceneTitle::keyDown(shared_ptr<Game> game, int key) {
             } else if (game->lang == "ko") {
                 game->lang = "en";
             }
-
             game->locale = Locale::data[game->lang];
         } else if (game->selectedTitle == 3) {
         } else if (game->selectedTitle == 4) {
