@@ -17,6 +17,10 @@ void SceneVillage::render(shared_ptr<Game> game) {
 
     game->village->render(game);
 
+    if (game->state == "adventure_confirm") {
+        Render::renderAdventureConfirm(game);
+    }
+
     if (game->menu == true) {
         Render::renderMenuVillage(game);
     }
@@ -30,6 +34,26 @@ void SceneVillage::keyDown(shared_ptr<Game> game, int key) {
         if (key == K_ESCAPE || alpha == 'q') {
             game->menu = true;
             game->selectedMenuVillage = 0;
+        }
+        if (game->state == "") {
+            if (alpha == 'x') {
+                game->village->player->interact(game);
+            }
+        } else if (game->state == "adventure_confirm") {
+            if (key == K_LEFT) {
+                game->selectedAdventureConfirm = (game->selectedAdventureConfirm + 1) % 2;
+            }
+            if (key == K_RIGHT) {
+                game->selectedAdventureConfirm = (game->selectedAdventureConfirm + 1) % 2;
+            }
+            if (key == K_RETURN) {
+                if (game->selectedAdventureConfirm == 0) {
+                    game->scene = "battle";
+                    game->state = "";
+                } else if (game->selectedAdventureConfirm == 1) {
+                    game->state = "";
+                }
+            }
         }
     } else {
         if (key == K_ESCAPE || alpha == 'q') {

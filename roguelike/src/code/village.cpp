@@ -20,7 +20,49 @@ VillagePlayer::VillagePlayer() {
 }
 
 void VillagePlayer::handleTick(shared_ptr<Game> game) {
+    move(game);
+}
 
+void VillagePlayer::move(shared_ptr<Game> game) {
+    sf::Vector2f velocity = {0, 0};
+    sf::Vector2f tempPosition = {rect.position.x, rect.position.y};
+    bool xPressed = false;
+    bool yPressed = false;
+
+    if (game->keyPressed["left"] == true) {
+        xPressed = true;
+        velocity.x -= 1;
+    }
+    if (game->keyPressed["right"] == true) {
+        xPressed = true;
+        velocity.x += 1;
+    }
+    if (game->keyPressed["up"] == true) {
+        yPressed = true;
+        velocity.y -= 1;
+    }
+    if (game->keyPressed["down"] == true) {
+        yPressed = true;
+        velocity.y += 1;
+    }
+
+    if (xPressed && yPressed) {
+        velocity *= 0.7f;
+    }
+
+    tempPosition.x += velocity.x * speed * game->delta;
+    tempPosition.y += velocity.y * speed * game->delta;
+
+    rect.position.x = tempPosition.x;
+    rect.position.y = tempPosition.y;
+}
+
+void VillagePlayer::interact(shared_ptr<Game> game) {
+    auto village = game->village;
+    if ((village->portalBattle->rect.position - rect.position).length() < 80) {
+        game->state = "adventure_confirm";
+        game->selectedAdventureConfirm = 0;
+    }
 }
 
 void VillagePlayer::render(shared_ptr<Game> game) {

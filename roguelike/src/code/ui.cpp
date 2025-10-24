@@ -15,7 +15,6 @@ std::unordered_map<std::string, std::vector<int>> UI::title = {
     {"text_exit", {180, 500}},
 };
 std::vector<std::vector<int>> UI::titleArrow = {{80, 160}, {80, 240}, {80, 320}, {80, 400}, {80, 480}};
-
 std::unordered_map<std::string, std::vector<int>> UI::menuVillage = {
     {"rect", {320, 200, 640, 320}},
     {"text_paused", {340, 220}},
@@ -27,3 +26,12 @@ std::unordered_map<std::string, std::vector<int>> UI::menuVillage = {
     {"text_quit", {340, 460}}
 };
 std::vector<std::vector<int>> UI::menuVillageArrow = {{240, 280}, {240, 360}, {240, 440}};
+std::unordered_map<std::string, std::vector<int>> UI::adventureConfirm = {
+    {"rect", {320, 240, 640, 240}},
+    {"text_title", {340, 260, 640, 240}},
+    {"button_yes", {420, 380, 160, 80}},
+    {"button_no", {740, 380, 160, 80}},
+    {"text_yes", {440, 400}},
+    {"text_no", {760, 400}}
+};
+std::vector<std::vector<int>> UI::adventureConfirmArrow = {{340, 380}, {660, 380}};

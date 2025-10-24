@@ -7,6 +7,16 @@ void Render::renderInit(shared_ptr<Game> game) {
     game->rText.setFillColor(sf::Color::Black);
 }
 
+void Render::renderAdventureConfirm(shared_ptr<Game> game) {
+    drawRect(game->window, game->rRect, UI::adventureConfirm["rect"], 2);
+    fillText(game->window, game->rText, game->locale["adventure_start"], UI::adventureConfirm["text_title"]);
+    drawRect(game->window, game->rRect, UI::adventureConfirm["button_yes"], 2);
+    fillText(game->window, game->rText, game->locale["yes"], UI::adventureConfirm["text_yes"]);
+    drawRect(game->window, game->rRect, UI::adventureConfirm["button_no"], 2);
+    fillText(game->window, game->rText, game->locale["no"], UI::adventureConfirm["text_no"]);
+    drawTexture(game->window, game->sprite, game->tex["arrow"], UI::adventureConfirmArrow[game->selectedAdventureConfirm]);
+}
+
 void Render::renderMenuVillage(shared_ptr<Game> game) {
     drawRect(game->window, game->rRect, UI::menuVillage["rect"], 2);
     drawRect(game->window, game->rRect, UI::menuVillage["rect"], 2);

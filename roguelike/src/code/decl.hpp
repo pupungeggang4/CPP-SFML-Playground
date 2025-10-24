@@ -36,6 +36,8 @@ class UI {
         static std::unordered_map<std::string, std::vector<int>> battle;
         static std::unordered_map<std::string, std::vector<int>> menuVillage;
         static std::vector<std::vector<int>> menuVillageArrow;
+        static std::unordered_map<std::string, std::vector<int>> adventureConfirm;
+        static std::vector<std::vector<int>> adventureConfirmArrow;
 };
 
 class Locale {
@@ -66,6 +68,7 @@ class VillagePlayer {
         VillagePlayer();
         void handleTick(shared_ptr<Game>);
         void render(shared_ptr<Game>);
+        void move(shared_ptr<Game>);
         void interact(shared_ptr<Game>);
 };
 
@@ -133,6 +136,7 @@ class Render {
     public:
         static void renderInit(shared_ptr<Game>);
         static void renderMenuVillage(shared_ptr<Game>);
+        static void renderAdventureConfirm(shared_ptr<Game>);
         static void fillText(sf::RenderTarget&, sf::Text, sf::String, std::vector<int>);
         static void drawRect(sf::RenderTarget&, sf::RectangleShape, std::vector<int>, float);
         static void drawTexture(sf::RenderTarget&, sf::Sprite, sf::Texture, std::vector<int>);
@@ -178,10 +182,12 @@ class Game {
         sf::Text rText = sf::Text(neodgm, "", 32);
         sf::Texture t = sf::Texture();
         sf::Sprite sprite = sf::Sprite(t);
+        sf::Clock clock = sf::Clock();
 
         std::string scene = "title", state = "";
         bool menu = false;
         int selectedTitle = 0, selectedMenuVillage = 0, selectedAdventureConfirm = 0, selectedMenuBattle = 0;
+        float frameCurrent = 0, framePrevious = 0, delta = 0.016;
         std::string lang = "en";
         std::unordered_map<std::string, sf::String> locale;
         std::unordered_map<std::string, bool> keyPressed = {

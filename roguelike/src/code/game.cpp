@@ -17,7 +17,7 @@ Game::Game() {
     sf::ContextSettings settings;
     settings.antiAliasingLevel = 0;
     window = sf::RenderWindow(sf::VideoMode({width, height}), "Roguelike Game", sf::Style::Default, sf::State::Windowed, settings);
-    window.setFramerateLimit(60);
+    //window.setFramerateLimit(60);
     window.setVerticalSyncEnabled(true);
     sf::View view({640, 360}, {1280, 720});
     window.setView(view);
@@ -31,12 +31,18 @@ Game::Game() {
     rRect.setOutlineThickness(2);
     rRect.setOutlineColor(sf::Color::Black);
 
+    framePrevious = clock.getElapsedTime().asSeconds();
+    frameCurrent = 0;
+
     field = make_shared<Field>();
     village = make_shared<Village>();
 }
 
 void Game::run(shared_ptr<Game> game) {
     while (game->window.isOpen()) {
+        frameCurrent = clock.getElapsedTime().asSeconds();
+        delta = frameCurrent - framePrevious;
+        framePrevious = clock.getElapsedTime().asSeconds();
         handleInput(game);
         handleScene(game);
     }
@@ -47,6 +53,8 @@ void Game::handleScene(shared_ptr<Game> game) {
         SceneTitle::loop(game);
     } else if (game->scene == "village") {
         SceneVillage::loop(game);
+    } else if (game->scene == "battle") {
+        SceneBattle::loop(game);
     }
 }
 
@@ -74,6 +82,8 @@ void Game::handleInput(shared_ptr<Game> game) {
                 SceneTitle::keyDown(game, key);
             } else if (game->scene == "village") {
                 SceneVillage::keyDown(game, key);
+            } else if (game->scene == "battle") {
+                SceneBattle::keyDown(game, key);
             }
         }
 
@@ -95,13 +105,15 @@ void Game::handleInput(shared_ptr<Game> game) {
                 SceneTitle::keyUp(game, key);
             } else if (game->scene == "village") {
                 SceneVillage::keyUp(game, key);
+            } else if (game->scene == "battle") {
+                SceneBattle::keyUp(game, key);
             }
+
         }
     }
 }
 
 void Game::init(shared_ptr<Game> game) {
-
 }
 
 void Game::loadFont() {
