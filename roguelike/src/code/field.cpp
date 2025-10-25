@@ -17,6 +17,7 @@ void Field::handleTick(shared_ptr<Game> game) {
     }
     camera.position.x = player->rect.position.x;
     camera.position.y = player->rect.position.y;
+    std::cout << drop.size() << std::endl;
 }
 
 void Field::render(shared_ptr<Game> game) {
