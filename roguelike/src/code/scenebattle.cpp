@@ -21,6 +21,10 @@ void SceneBattle::render(shared_ptr<Game> game) {
         Render::renderAdventureStart(game);
     }
 
+    if (game->menu == true) {
+        Render::renderMenuBattle(game);
+    }
+
     game->window.display();
 }
 
@@ -30,6 +34,7 @@ void SceneBattle::keyDown(shared_ptr<Game> game, int key) {
     if (game->menu == false) {
         if (key == K_ESCAPE || alpha == 'q') {
             game->menu = true;
+            game->selectedMenuBattle = 0;
         }
 
         if (game->state == "adventure_start") {
@@ -46,6 +51,28 @@ void SceneBattle::keyDown(shared_ptr<Game> game, int key) {
     } else {
         if (key == K_ESCAPE || alpha == 'q') {
             game->menu = false;
+        }
+        if (key == K_UP) {
+            game->selectedMenuBattle = (game->selectedMenuBattle + 3) % 4;
+        }
+        if (key == K_DOWN) {
+            game->selectedMenuBattle = (game->selectedMenuBattle + 1) % 4;
+        }
+        if (key == K_RETURN) {
+            if (game->selectedMenuBattle == 0) {
+                game->menu = false;
+                game->state = "";
+            } else if (game->selectedMenuBattle == 1) {
+                game->menu = false;
+                game->scene = "village";
+                game->state = "";
+            } else if (game->selectedMenuBattle == 2) {
+                game->menu = false;
+                game->scene = "title";
+                game->state = "";
+            } else if (game->selectedMenuBattle == 3) {
+                game->window.close();
+            }
         }
     }
 }

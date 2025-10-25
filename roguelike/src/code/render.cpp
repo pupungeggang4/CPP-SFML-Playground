@@ -64,6 +64,22 @@ void Render::renderMenuVillage(shared_ptr<Game> game) {
     drawTexture(game->window, game->sprite, game->tex["down"], UI::menuVillageArrow[game->selectedMenuVillage]);
 }
 
+void Render::renderMenuBattle(shared_ptr<Game> game) {
+    game->rRect.setFillColor(sf::Color::White);
+    drawRect(game->window, game->rRect, UI::menuBattle["rect"], 0);
+    drawRect(game->window, game->rRect, UI::menuBattle["rect"], 2);
+    fillText(game->window, game->rText, game->locale["paused"], UI::menuBattle["text_paused"]);
+    drawRect(game->window, game->rRect, UI::menuBattle["button_resume"], 2);
+    fillText(game->window, game->rText, game->locale["resume"], UI::menuBattle["text_resume"]);
+    drawRect(game->window, game->rRect, UI::menuBattle["button_surrender"], 2);
+    fillText(game->window, game->rText, game->locale["surrender"], UI::menuBattle["text_surrender"]);
+    drawRect(game->window, game->rRect, UI::menuBattle["button_to_title"], 2);
+    fillText(game->window, game->rText, game->locale["to_title"], UI::menuBattle["text_to_title"]);
+    drawRect(game->window, game->rRect, UI::menuBattle["button_exit"], 2);
+    fillText(game->window, game->rText, game->locale["exit"], UI::menuBattle["text_exit"]);
+    drawTexture(game->window, game->sprite, game->tex["arrow"], UI::menuBattleArrow[game->selectedMenuBattle]);
+}
+
 void Render::fillText(sf::RenderTarget& rt, sf::Text& rText, sf::String text, std::vector<int> pos) {
     rText.setString(text);
     rText.setPosition({float(pos[0]), float(pos[1])});

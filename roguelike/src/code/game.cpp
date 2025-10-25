@@ -17,8 +17,8 @@ Game::Game() {
     sf::ContextSettings settings;
     settings.antiAliasingLevel = 0;
     window = sf::RenderWindow(sf::VideoMode({width, height}), "Roguelike Game", sf::Style::Default, sf::State::Windowed, settings);
-    //window.setFramerateLimit(60);
-    window.setVerticalSyncEnabled(true);
+    window.setFramerateLimit(60);
+    //window.setVerticalSyncEnabled(true);
     sf::View view({640, 360}, {1280, 720});
     window.setView(view);
 

@@ -48,3 +48,18 @@ std::unordered_map<std::string, std::vector<int>> UI::battle = {
     {"icon_gold", {20, 80}},
     {"text_gold", {64, 88}}
 };
+std::unordered_map<std::string, std::vector<int>> UI::menuBattle = {
+    {"rect", {320, 160, 640, 400}},
+    {"text_paused", {340, 180}},
+    {"button_resume", {320, 240, 640, 80}},
+    {"text_resume", {340, 260}},
+    {"button_surrender", {320, 320, 640, 80}},
+    {"text_surrender", {340, 340}},
+    {"button_to_title", {320, 400, 640, 80}},
+    {"text_to_title", {340, 420}},
+    {"button_exit", {320, 480, 640, 80}},
+    {"text_exit", {340, 500}},
+};
+std::vector<std::vector<int>> UI::menuBattleArrow = {
+    {240, 240}, {240, 320}, {240, 400}, {240, 480} 
+};
