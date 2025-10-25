@@ -2,6 +2,11 @@
 #include "decl.hpp"
 
 void SceneBattle::loop(shared_ptr<Game> game) {
+    if (game->menu == false) {
+        if (game->state == "") {
+            game->field->handleTick(game);
+        }
+    }
     render(game);
 }
 
@@ -9,9 +14,13 @@ void SceneBattle::render(shared_ptr<Game> game) {
     game->window.clear(sf::Color::White);
     Render::renderInit(game);
 
+    game->field->render(game);
+    Render::renderBattleUIUpper(game);
+
     if (game->state == "adventure_start") {
         Render::renderAdventureStart(game);
     }
+
     game->window.display();
 }
 

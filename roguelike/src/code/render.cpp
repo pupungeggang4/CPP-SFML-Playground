@@ -4,10 +4,12 @@
 
 void Render::renderInit(shared_ptr<Game> game) {
     game->rRect.setOutlineColor(sf::Color::Black);
+    game->rRect.setFillColor(sf::Color::Transparent);
     game->rText.setFillColor(sf::Color::Black);
 }
 
 void Render::renderAdventureConfirm(shared_ptr<Game> game) {
+    game->rRect.setFillColor(sf::Color::White);
     drawRect(game->window, game->rRect, UI::adventureConfirm["rect"], 0);
     drawRect(game->window, game->rRect, UI::adventureConfirm["rect"], 2);
     fillText(game->window, game->rText, game->locale["adventure_start"], UI::adventureConfirm["text_title"]);
@@ -19,6 +21,7 @@ void Render::renderAdventureConfirm(shared_ptr<Game> game) {
 }
 
 void Render::renderAdventureStart(shared_ptr<Game> game) {
+    game->rRect.setFillColor(sf::Color::White);
     drawRect(game->window, game->rRect, std::get<0>(UI::window["rect"]), 0);
     drawRect(game->window, game->rRect, std::get<0>(UI::window["rect"]), 2);
     fillText(game->window, game->rText, game->locale["select_weapon"], std::get<0>(UI::window["text_title"]));
@@ -26,7 +29,26 @@ void Render::renderAdventureStart(shared_ptr<Game> game) {
     for (int i = 0; i < 3; i++) {
         drawRect(game->window, game->rRect, std::get<1>(UI::window["weapon"])[i], 2);
     }
-    drawTexture(game->window, game->sprite, game->tex["arrow"], std::get<1>(UI::window["arrow_weapon"])[game->selectedAdventureStart]);
+    drawTexture(game->window, game->sprite, game->tex["arrow_down"], std::get<1>(UI::window["arrow_weapon"])[game->selectedAdventureStart]);
+}
+
+void Render::renderBattleUIUpper(shared_ptr<Game> game) {
+    shared_ptr<FieldPlayer> player = game->field->player;
+    game->rText.setCharacterSize(24);
+
+    std::vector<int> expSize = {UI::battle["bar_exp"][0], UI::battle["bar_exp"][1], UI::battle["bar_exp"][2] * player->exp / player->expMax, UI::battle["bar_exp"][3]};
+    game->rRect.setFillColor(sf::Color::Blue);
+    drawRect(game->window, game->rRect, expSize, 0);
+    drawRect(game->window, game->rRect, UI::battle["bar_exp"], 2);
+
+    drawTexture(game->window, game->sprite, game->tex["exporb"], UI::battle["icon_exp"]);
+    fillText(game->window, game->rText, "Lv." + std::to_string(player->level) + " Exp:" + std::to_string(player->exp) + "/" + std::to_string(player->expMax), UI::battle["text_exp"]);
+
+    drawTexture(game->window, game->sprite, game->tex["coin"], UI::battle["icon_gold"]);
+    fillText(game->window, game->rText, std::to_string(player->gold), UI::battle["text_gold"]);    
+
+    game->rRect.setFillColor(sf::Color::White);
+    game->rText.setCharacterSize(32);
 }
 
 void Render::renderMenuVillage(shared_ptr<Game> game) {
@@ -39,16 +61,19 @@ void Render::renderMenuVillage(shared_ptr<Game> game) {
     fillText(game->window, game->rText, game->locale["to_title"], UI::menuVillage["text_exit"]);
     drawRect(game->window, game->rRect, UI::menuVillage["button_quit"], 2);
     fillText(game->window, game->rText, game->locale["exit"], UI::menuVillage["text_quit"]);
-    drawTexture(game->window, game->sprite, game->tex["arrow"], UI::menuVillageArrow[game->selectedMenuVillage]);
+    drawTexture(game->window, game->sprite, game->tex["down"], UI::menuVillageArrow[game->selectedMenuVillage]);
 }
 
-void Render::fillText(sf::RenderTarget& rt, sf::Text& rText, sf::String& text, std::vector<int> pos) {
+void Render::fillText(sf::RenderTarget& rt, sf::Text& rText, sf::String text, std::vector<int> pos) {
     rText.setString(text);
     rText.setPosition({float(pos[0]), float(pos[1])});
     rt.draw(rText);
 }
 
 void Render::drawRect(sf::RenderTarget& rt, sf::RectangleShape& rRect, std::vector<int> rect, float thickness) {
+    if (thickness > 0) {
+        rRect.setFillColor(sf::Color::Transparent);
+    }
     rRect.setOutlineThickness(thickness);
     rRect.setPosition({float(rect[0]), float(rect[1])});
     rRect.setSize({float(rect[2]), float(rect[3])});

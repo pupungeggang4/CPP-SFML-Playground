@@ -41,3 +41,10 @@ std::unordered_map<std::string, UICoord> UI::window = {
     {"weapon", UI2D{{200, 240, 200, 200}, {540, 240, 200, 200}, {880, 240, 200, 200}}},
     {"arrow_weapon", UI2D{{260, 120}, {600, 120}, {920, 120}}}
 };
+std::unordered_map<std::string, std::vector<int>> UI::battle = {
+    {"bar_exp", {20, 20, 1240, 20}},
+    {"icon_exp", {20, 40}},
+    {"text_exp", {64, 48}},
+    {"icon_gold", {20, 80}},
+    {"text_gold", {64, 88}}
+};

@@ -51,6 +51,7 @@ void SceneVillage::keyDown(shared_ptr<Game> game, int key) {
                     game->scene = "battle";
                     game->state = "adventure_start";
                     game->selectedAdventureStart = 0;
+                    game->field = make_shared<Field>();
                 } else if (game->selectedAdventureConfirm == 1) {
                     game->state = "";
                 }

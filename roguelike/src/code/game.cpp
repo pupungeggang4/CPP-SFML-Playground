@@ -43,6 +43,7 @@ void Game::run(shared_ptr<Game> game) {
         frameCurrent = clock.getElapsedTime().asSeconds();
         delta = frameCurrent - framePrevious;
         framePrevious = clock.getElapsedTime().asSeconds();
+        //std::cout << delta << std::endl;
         handleInput(game);
         handleScene(game);
     }
@@ -125,4 +126,9 @@ void Game::loadImage() {
     tex.emplace("arrow", sf::Texture("image/arrow.png"));
     tex.emplace("player", sf::Texture("image/player.png"));
     tex.emplace("portal", sf::Texture("image/portal.png"));
+    tex.emplace("arrow_down", sf::Texture("image/arrowdown.png"));
+    tex.emplace("exporb", sf::Texture("image/exporb.png"));
+    tex.emplace("coin", sf::Texture("image/coin.png"));
+    tex.emplace("life", sf::Texture("image/life.png"));
+    tex.emplace("energy", sf::Texture("image/energy.png"));
 }
