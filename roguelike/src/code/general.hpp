@@ -19,6 +19,9 @@
 
 using std::shared_ptr;
 using std::make_shared;
+typedef std::vector<int> UI1D;
+typedef std::vector<std::vector<int>> UI2D;
+using UICoord = std::variant<std::vector<int>, std::vector<std::vector<int>>>;
 
 #define K_RIGHT 86
 #define K_LEFT 87

@@ -35,3 +35,9 @@ std::unordered_map<std::string, std::vector<int>> UI::adventureConfirm = {
     {"text_no", {760, 400}}
 };
 std::vector<std::vector<int>> UI::adventureConfirmArrow = {{340, 380}, {660, 380}};
+std::unordered_map<std::string, UICoord> UI::window = {
+    {"rect", UI1D{160, 40, 960, 640}},
+    {"text_title", UI1D{180, 60}},
+    {"weapon", UI2D{{200, 240, 200, 200}, {540, 240, 200, 200}, {880, 240, 200, 200}}},
+    {"arrow_weapon", UI2D{{260, 120}, {600, 120}, {920, 120}}}
+};

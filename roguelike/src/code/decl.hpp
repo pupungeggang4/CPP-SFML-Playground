@@ -33,11 +33,15 @@ class UI {
         static std::unordered_map<std::string, std::vector<int>> title;
         static std::vector<std::vector<int>> titleArrow;
         static std::unordered_map<std::string, std::vector<int>> village;
-        static std::unordered_map<std::string, std::vector<int>> battle;
         static std::unordered_map<std::string, std::vector<int>> menuVillage;
         static std::vector<std::vector<int>> menuVillageArrow;
         static std::unordered_map<std::string, std::vector<int>> adventureConfirm;
         static std::vector<std::vector<int>> adventureConfirmArrow;
+        static std::unordered_map<std::string, UICoord> window;
+        static std::vector<std::vector<int>> adventureStartArrow;
+        static std::unordered_map<std::string, std::vector<int>> battle;
+        static std::unordered_map<std::string, std::vector<int>> menuBattle;
+        static std::vector<std::vector<int>> menuBattleArrow;
 };
 
 class Locale {
@@ -137,10 +141,11 @@ class Render {
         static void renderInit(shared_ptr<Game>);
         static void renderMenuVillage(shared_ptr<Game>);
         static void renderAdventureConfirm(shared_ptr<Game>);
-        static void fillText(sf::RenderTarget&, sf::Text, sf::String, std::vector<int>);
-        static void drawRect(sf::RenderTarget&, sf::RectangleShape, std::vector<int>, float);
-        static void drawTexture(sf::RenderTarget&, sf::Sprite, sf::Texture, std::vector<int>);
-        static void drawCenterCam(sf::RenderTarget&, sf::Sprite, sf::FloatRect, sf::FloatRect);
+        static void renderAdventureStart(shared_ptr<Game>);
+        static void fillText(sf::RenderTarget&, sf::Text&, sf::String&, std::vector<int>);
+        static void drawRect(sf::RenderTarget&, sf::RectangleShape&, std::vector<int>, float);
+        static void drawTexture(sf::RenderTarget&, sf::Sprite&, sf::Texture&, std::vector<int>);
+        static void drawCenterCam(sf::RenderTarget&, sf::Sprite&, sf::FloatRect, sf::FloatRect);
 };
 
 class Func {
@@ -186,7 +191,7 @@ class Game {
 
         std::string scene = "title", state = "";
         bool menu = false;
-        int selectedTitle = 0, selectedMenuVillage = 0, selectedAdventureConfirm = 0, selectedMenuBattle = 0;
+        int selectedTitle = 0, selectedMenuVillage = 0, selectedAdventureConfirm = 0, selectedMenuBattle = 0, selectedAdventureStart = 0;
         float frameCurrent = 0, framePrevious = 0, delta = 0.016;
         std::string lang = "en";
         std::unordered_map<std::string, sf::String> locale;

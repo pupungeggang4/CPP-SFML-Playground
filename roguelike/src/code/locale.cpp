@@ -15,6 +15,7 @@ std::unordered_map<std::string, std::unordered_map<std::string, sf::String>> Loc
         {"adventure_start", L"모험을 시작하겠습니까?"},
         {"yes", L"네"},
         {"no", L"아니요"},
+        {"select_weapon", L"무기를 선택하세요."},
     }},
     {"en", {
         {"game_name", "Roguelike"},
@@ -29,5 +30,6 @@ std::unordered_map<std::string, std::unordered_map<std::string, sf::String>> Loc
         {"adventure_start", "Start Adventure?"},
         {"yes", "yes"},
         {"no", "no"},
+        {"select_weapon", "Select Weapon."}
     }}
 };

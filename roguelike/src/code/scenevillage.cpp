@@ -49,7 +49,8 @@ void SceneVillage::keyDown(shared_ptr<Game> game, int key) {
             if (key == K_RETURN) {
                 if (game->selectedAdventureConfirm == 0) {
                     game->scene = "battle";
-                    game->state = "";
+                    game->state = "adventure_start";
+                    game->selectedAdventureStart = 0;
                 } else if (game->selectedAdventureConfirm == 1) {
                     game->state = "";
                 }
