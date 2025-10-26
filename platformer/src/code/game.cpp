@@ -16,17 +16,22 @@ Game::Game() {
     window.setFramerateLimit(60);
     sf::View view({640, 360}, {1280, 720});
     window.setView(view);
+
+    loadImage();
 }
 
 void Game::init(shared_ptr<Game> game) {
-    field = make_shared<Field>(game);
+    field = make_shared<Field>();
     frameCurrent = 0;
     framePrevious = clock.getElapsedTime().asSeconds();
     delta = 0.016;
+    locale = Locale::data[lang];
 }
 
 void Game::loadImage() {
-    locale = Locale::data[lang];
+    Res::tex.insert(std::make_pair("arrow", sf::Texture("image/arrow.png")));
+    Res::tex.insert(std::make_pair("player", sf::Texture("image/player.png")));
+    Res::tex.insert(std::make_pair("coin", sf::Texture("image/sprite/spritecoin.png")));
     tex.insert(std::make_pair("arrow", sf::Texture("image/arrow.png")));
     tex.insert(std::make_pair("player", sf::Texture("image/player.png")));
     tex.insert(std::make_pair("coin", sf::Texture("image/sprite/spritecoin.png")));

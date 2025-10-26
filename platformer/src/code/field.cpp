@@ -10,11 +10,19 @@ Field::Field() {
 void Field::handleTick(shared_ptr<Game> game) {
     shared_ptr<Field> field = game->field;
     player->handleTick(game);
+
+    for (int i = entityList.size() - 1; i >= 0; i--) {
+        entityCurrent = entityList[i];
+        entityList[i]->handleTick(game);
+    }
 }
 
 void Field::render(shared_ptr<Game> game) {
     player->render(game);
-    entityList[0]->render(game);
+
+    for (int i = entityList.size() - 1; i >= 0; i--) {
+        entityList[i]->render(game);
+    }
 }
 
 FieldPlayer::FieldPlayer() {
@@ -36,7 +44,7 @@ void FieldPlayer::render(shared_ptr<Game> game) {
     rTex.clear(sf::Color::Transparent);
     Render::drawImage(rTex, sprite, game->tex["player"], {0, 0});
     rTex.display();
-    
+
     const sf::Texture& t = rTex.getTexture();
     spriteOut.setTexture(t, true);
     Render::drawCenterCam(game->window, spriteOut, rect, field->cam);

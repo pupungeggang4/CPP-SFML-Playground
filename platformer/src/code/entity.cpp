@@ -1,8 +1,9 @@
 #include "general.hpp"
 #include "decl.hpp"
 
-Entity::Entity(shared_ptr<Game> game) {
-
+Entity::Entity() {
+    const sf::Texture& t = rTex.getTexture();
+    spriteOut.setTexture(t, true);
 }
 
 void Entity::render(shared_ptr<Game> game) {
@@ -16,9 +17,11 @@ void Entity::render(shared_ptr<Game> game) {
     rTex.draw(sprite);
     rTex.display();
 
-    const sf::Texture& t = rTex.getTexture();
-    spriteOut.setTexture(t, true);
-    Render::drawCenterCam(rt, spriteOut, rect, field->cam);
+    Render::drawCenterCam(game->window, spriteOut, rect, field->cam);
+}
+
+void Entity::handleTick(shared_ptr<Game> game) {
+
 }
 
 Coin::Coin() : Entity() {
@@ -31,4 +34,14 @@ Coin::Coin() : Entity() {
     };
     rTex = sf::RenderTexture({40, 40});
     rect = sf::FloatRect({0, 0}, {40, 40});
+
+    sprite.setTexture(Res::tex["coin"]);
+}
+
+void Coin::render(shared_ptr<Game> game) {
+    Entity::render(game);
+}
+
+void Coin::handleTick(shared_ptr<Game> game) {
+    
 }

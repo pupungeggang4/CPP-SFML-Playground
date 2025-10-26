@@ -4,7 +4,7 @@
 void SceneField::loop(shared_ptr<Game> game) {
     if (game->menu == false) {
         if (game->state == "") {
-            game->field->handleTick(game->field, game);
+            game->field->handleTick(game);
         }
     }
     render(game);
@@ -13,10 +13,13 @@ void SceneField::loop(shared_ptr<Game> game) {
 void SceneField::render(shared_ptr<Game> game) {
     game->window.clear(sf::Color::White);
     Render::init(game);
+
+    game->field->render(game);
+
     if (game->menu == true) {
         Render::renderMenu(game);
     }
-    game->field->render(game->window, game->field, game);
+    
     game->window.display();
 }
 

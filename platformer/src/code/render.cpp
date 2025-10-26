@@ -2,6 +2,7 @@
 #include "decl.hpp"
 
 void Render::init(shared_ptr<Game> game) {
+    game->rRect.setOutlineColor(sf::Color::Transparent);
     game->rRect.setOutlineColor(sf::Color::Black);
     game->rRect.setOutlineThickness(2);
     game->rText.setFillColor(sf::Color::Black);
@@ -22,6 +23,9 @@ void Render::renderMenu(shared_ptr<Game> game) {
 }
 
 void Render::drawRect(sf::RenderTarget& rt, sf::RectangleShape rRect, std::vector<int> pos, float thickness) {
+    if (thickness > 0) {
+        rRect.setFillColor(sf::Color::Transparent);
+    }
     rRect.setOutlineThickness(thickness);
     rRect.setPosition({float(pos[0]), float(pos[1])});
     rRect.setSize({float(pos[2]), float(pos[3])});

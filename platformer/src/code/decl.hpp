@@ -1,6 +1,7 @@
 #pragma once
 #include "general.hpp"
 
+class Res;
 class UI;
 class Data;
 class Locale;
@@ -17,6 +18,11 @@ class Render;
 class SceneTitle;
 class SceneField;
 class Game;
+
+class Res {
+    public:
+        static std::unordered_map<std::string, sf::Texture> tex;
+};
 
 class UI {
     public:
@@ -41,6 +47,7 @@ class Field {
         shared_ptr<FieldPlayer> player;
         sf::FloatRect cam = {{0.0, 0.0}, {1280.0, 720.0}};
         std::vector<shared_ptr<Entity>> entityList = {};
+        shared_ptr<Entity> entityCurrent;
 
         Field();
         void handleTick(shared_ptr<Game>);
@@ -59,14 +66,15 @@ class Entity {
         float frameInterval = 0, frameTime = 0;
 
         Entity();
-        void render(shared_ptr<Game>);
+        virtual void render(shared_ptr<Game>);
+        virtual void handleTick(shared_ptr<Game>);
 };
 
 class Coin : public Entity {
     public:
         Coin();
         void render(shared_ptr<Game>);
-        //void drawThis(sf::RenderTarget&, shared_ptr<Field>, shared_ptr<Game>);
+        void handleTick(shared_ptr<Game>);
 };
 
 class Unit {
@@ -140,6 +148,7 @@ class Game {
         shared_ptr<Field> field;
 
         Game();
+        void loadImage();
         void init(shared_ptr<Game>);
         void run(shared_ptr<Game>);
         void handleInput(shared_ptr<Game>);
