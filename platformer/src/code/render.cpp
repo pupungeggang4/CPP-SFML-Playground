@@ -7,18 +7,18 @@ void Render::init(shared_ptr<Game> game) {
     game->rText.setFillColor(sf::Color::Black);
 }
 
-void Render::renderMenu(sf::RenderTarget& rt, shared_ptr<Game> game) {
+void Render::renderMenu(shared_ptr<Game> game) {
     game->rRect.setFillColor(sf::Color::White);
-    Render::drawRect(rt, game->rRect, UI::menu["rect"], 0);
-    Render::drawRect(rt, game->rRect, UI::menu["rect"], 2);
-    Render::fillText(rt, game->rText, game->locale["paused"], UI::menu["text_paused"]);
-    Render::drawRect(rt, game->rRect, UI::menu["button_resume"], 2);
-    Render::fillText(rt, game->rText, game->locale["resume"], UI::menu["text_resume"]);
-    Render::drawRect(rt, game->rRect, UI::menu["button_to_title"], 2);
-    Render::fillText(rt, game->rText, game->locale["to_title"], UI::menu["text_to_title"]);
-    Render::drawRect(rt, game->rRect, UI::menu["button_exit"], 2);
-    Render::fillText(rt, game->rText, game->locale["exit"], UI::menu["text_exit"]);
-    Render::drawImage(rt, game->sprite, game->tex["arrow"], UI::menuArrow[game->selectedMenu]);
+    Render::drawRect(game->window, game->rRect, UI::menu["rect"], 0);
+    Render::drawRect(game->window, game->rRect, UI::menu["rect"], 2);
+    Render::fillText(game->window, game->rText, game->locale["paused"], UI::menu["text_paused"]);
+    Render::drawRect(game->window, game->rRect, UI::menu["button_resume"], 2);
+    Render::fillText(game->window, game->rText, game->locale["resume"], UI::menu["text_resume"]);
+    Render::drawRect(game->window, game->rRect, UI::menu["button_to_title"], 2);
+    Render::fillText(game->window, game->rText, game->locale["to_title"], UI::menu["text_to_title"]);
+    Render::drawRect(game->window, game->rRect, UI::menu["button_exit"], 2);
+    Render::fillText(game->window, game->rText, game->locale["exit"], UI::menu["text_exit"]);
+    Render::drawImage(game->window, game->sprite, game->tex["arrow"], UI::menuArrow[game->selectedMenu]);
 }
 
 void Render::drawRect(sf::RenderTarget& rt, sf::RectangleShape rRect, std::vector<int> pos, float thickness) {

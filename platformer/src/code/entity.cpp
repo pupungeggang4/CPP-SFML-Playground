@@ -5,13 +5,9 @@ Entity::Entity(shared_ptr<Game> game) {
 
 }
 
-void Entity::render(sf::RenderTarget& rt, shared_ptr<Field> field, shared_ptr<Game> game) {
-    drawThis(rt, game->tex["coin"], field, game);
-    const sf::Texture& t = rTex.getTexture();
-    spriteOut.setTexture(t, true);
-    Render::drawCenterCam(rt, spriteOut, rect, field->cam);
-}
-void Entity::drawThis(sf::RenderTarget& rt, sf::Texture texTarget, shared_ptr<Field> field, shared_ptr<Game> game) {
+void Entity::render(shared_ptr<Game> game) {
+    shared_ptr<Field> field = game->field;
+
     frameTime += game->delta;
     frameCurrent = int(frameTime / frameInterval) % frames;
 
@@ -19,9 +15,13 @@ void Entity::drawThis(sf::RenderTarget& rt, sf::Texture texTarget, shared_ptr<Fi
     sprite.setTextureRect(frameCoord[frameCurrent]);
     rTex.draw(sprite);
     rTex.display();
+
+    const sf::Texture& t = rTex.getTexture();
+    spriteOut.setTexture(t, true);
+    Render::drawCenterCam(rt, spriteOut, rect, field->cam);
 }
 
-Coin::Coin(shared_ptr<Game> game) : Entity(game) {
+Coin::Coin() : Entity() {
     frameTime = 0; frameInterval = 0.2; frameCurrent = 0; frames = 4;
     frameCoord = {
         {{0, 0}, {40, 40}},
@@ -31,5 +31,4 @@ Coin::Coin(shared_ptr<Game> game) : Entity(game) {
     };
     rTex = sf::RenderTexture({40, 40});
     rect = sf::FloatRect({0, 0}, {40, 40});
-    sprite.setTexture(game->tex["coin"], true);
 }

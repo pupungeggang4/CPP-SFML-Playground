@@ -14,7 +14,7 @@ void SceneField::render(shared_ptr<Game> game) {
     game->window.clear(sf::Color::White);
     Render::init(game);
     if (game->menu == true) {
-        Render::renderMenu(game->window, game);
+        Render::renderMenu(game);
     }
     game->field->render(game->window, game->field, game);
     game->window.display();

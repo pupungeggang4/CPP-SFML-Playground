@@ -36,15 +36,15 @@ class Data {
     
 };
 
-class Field : public enable_shared_from_this<Field> {
+class Field {
     public:
         shared_ptr<FieldPlayer> player;
         sf::FloatRect cam = {{0.0, 0.0}, {1280.0, 720.0}};
         std::vector<shared_ptr<Entity>> entityList = {};
 
-        Field(shared_ptr<Game>);
-        void handleTick(shared_ptr<Field>, shared_ptr<Game>);
-        void render(sf::RenderTarget&, shared_ptr<Field>, shared_ptr<Game>);
+        Field();
+        void handleTick(shared_ptr<Game>);
+        void render(shared_ptr<Game>);
 };
 
 class Entity {
@@ -52,22 +52,20 @@ class Entity {
         sf::RenderTexture rTex = sf::RenderTexture({40, 40});
         sf::FloatRect rect;
         sf::Texture tex;
-        shared_ptr<sf::Texture> texTarget;
         sf::Sprite sprite = sf::Sprite(tex), spriteOut = sf::Sprite(tex);
 
         std::vector<sf::IntRect> frameCoord = {};
         int frames = 0, frameCurrent = 0;
         float frameInterval = 0, frameTime = 0;
 
-        Entity(shared_ptr<Game>);
-        void render(sf::RenderTarget&, shared_ptr<Field>, shared_ptr<Game>);
-        void drawThis(sf::RenderTarget&, sf::Texture, shared_ptr<Field>, shared_ptr<Game>);
+        Entity();
+        void render(shared_ptr<Game>);
 };
 
 class Coin : public Entity {
     public:
-        Coin(shared_ptr<Game>);
-        //void render(sf::RenderTarget&, shared_ptr<Field>, shared_ptr<Game>);
+        Coin();
+        void render(shared_ptr<Game>);
         //void drawThis(sf::RenderTarget&, shared_ptr<Field>, shared_ptr<Game>);
 };
 
@@ -84,17 +82,17 @@ class FieldPlayer {
         sf::Sprite spriteOut = sf::Sprite(tex);
 
         FieldPlayer();
-        void handleTick(shared_ptr<Field>, shared_ptr<Game>);
-        void render(sf::RenderTarget&, shared_ptr<Field> field, shared_ptr<Game>);
+        void handleTick(shared_ptr<Game>);
+        void render(shared_ptr<Game>);
 };
 
 class Render {
     public:
         static void init(shared_ptr<Game>);
+        static void renderMenu(shared_ptr<Game>);
         static void drawRect(sf::RenderTarget&, sf::RectangleShape, std::vector<int>, float);
         static void fillText(sf::RenderTarget&, sf::Text, sf::String, std::vector<int>);
         static void drawImage(sf::RenderTarget&, sf::Sprite, sf::Texture, std::vector<int>);
-        static void renderMenu(sf::RenderTarget&, shared_ptr<Game>);
         static void drawCenterCam(sf::RenderTarget& rt, sf::Sprite sprite, sf::FloatRect rect, sf::FloatRect cam);
 };
 

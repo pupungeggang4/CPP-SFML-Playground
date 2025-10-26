@@ -1,25 +1,26 @@
 #include "general.hpp"
 #include "decl.hpp"
 
-Field::Field(shared_ptr<Game> game) {
+Field::Field() {
     player = make_shared<FieldPlayer>();
-    shared_ptr<Entity> e = make_shared<Coin>(game);
+    shared_ptr<Entity> e = make_shared<Coin>();
     entityList.push_back(e);
 }
 
-void Field::handleTick(shared_ptr<Field> field, shared_ptr<Game> game) {
-    player->handleTick(field, game);
+void Field::handleTick(shared_ptr<Game> game) {
+    shared_ptr<Field> field = game->field;
+    player->handleTick(game);
 }
 
-void Field::render(sf::RenderTarget& rt, shared_ptr<Field> field, shared_ptr<Game> game) {
-    player->render(rt, field, game);
-    entityList[0]->render(rt, field, game);
+void Field::render(shared_ptr<Game> game) {
+    player->render(game);
+    entityList[0]->render(game);
 }
 
 FieldPlayer::FieldPlayer() {
 }
 
-void FieldPlayer::handleTick(shared_ptr<Field> field, shared_ptr<Game> game) {
+void FieldPlayer::handleTick(shared_ptr<Game> game) {
     if (game->keyPressed["left"]) {
         rect.position.x -= 320 * 0.016;
     }
@@ -28,12 +29,15 @@ void FieldPlayer::handleTick(shared_ptr<Field> field, shared_ptr<Game> game) {
     }
 }
 
-void FieldPlayer::render(sf::RenderTarget& rt, shared_ptr<Field> field, shared_ptr<Game> game) {
+void FieldPlayer::render(shared_ptr<Game> game) {
+    shared_ptr<Field> field = game->field;
+    sprite.setTexture(game->tex["player"]);
+
     rTex.clear(sf::Color::Transparent);
     Render::drawImage(rTex, sprite, game->tex["player"], {0, 0});
     rTex.display();
+    
     const sf::Texture& t = rTex.getTexture();
     spriteOut.setTexture(t, true);
-
-    Render::drawCenterCam(rt, spriteOut, rect, field->cam);
+    Render::drawCenterCam(game->window, spriteOut, rect, field->cam);
 }
