@@ -11,6 +11,8 @@
 #include <variant>
 #include <array>
 #include <vector>
+#include <iterator>
+#include <algorithm>
 #include <unordered_map>
 #include <memory>
 

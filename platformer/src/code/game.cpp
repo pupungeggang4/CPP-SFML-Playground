@@ -13,7 +13,7 @@ Game::Game() {
         width = 1280; height = 720;
     }
 
-    window = sf::RenderWindow(sf::VideoMode({width, height}), "Auto Card Battle");
+    window = sf::RenderWindow(sf::VideoMode({width, height}), "Platformer Game");
     //window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(60);
     sf::View view({640, 360}, {1280, 720});

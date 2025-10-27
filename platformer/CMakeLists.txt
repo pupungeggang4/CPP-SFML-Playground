@@ -12,6 +12,7 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
+
 file(GLOB SCRIPTS src/code/*.cpp)
 file(COPY "${CMAKE_SOURCE_DIR}/src/font" DESTINATION "${CMAKE_BINARY_DIR}/bin")
 file(COPY "${CMAKE_SOURCE_DIR}/src/image" DESTINATION "${CMAKE_BINARY_DIR}/bin")
