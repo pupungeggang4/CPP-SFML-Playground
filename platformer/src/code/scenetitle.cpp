@@ -17,7 +17,7 @@ void SceneTitle::render(shared_ptr<Game> game) {
     Render::fillText(game->window, game->rText, game->locale["erase_data"], UI::title["text_erase"]);
     Render::drawRect(game->window, game->rRect, UI::title["button_exit"], 2);
     Render::fillText(game->window, game->rText, game->locale["exit"], UI::title["text_exit"]);
-    Render::drawImage(game->window, game->sprite, game->tex["arrow"], UI::titleArrow[game->selectedTitle]);
+    Render::drawImage(game->window, game->sprite, game->image["arrow"], UI::titleArrow[game->selectedTitle]);
     game->window.display();
 }
 

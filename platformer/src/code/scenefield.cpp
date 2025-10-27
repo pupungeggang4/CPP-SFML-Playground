@@ -15,6 +15,8 @@ void SceneField::render(shared_ptr<Game> game) {
     Render::init(game);
 
     game->field->render(game);
+    Render::drawImage(game->window, game->sprite, game->image["coin"], UI::field["icon_coin"]);
+    Render::fillText(game->window, game->rText, std::to_string(game->field->player->coin), UI::field["text_coin"]);
 
     if (game->menu == true) {
         Render::renderMenu(game);

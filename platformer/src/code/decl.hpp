@@ -1,7 +1,6 @@
 #pragma once
 #include "general.hpp"
 
-class Res;
 class UI;
 class Data;
 class Locale;
@@ -18,11 +17,6 @@ class Render;
 class SceneTitle;
 class SceneField;
 class Game;
-
-class Res {
-    public:
-        static std::unordered_map<std::string, sf::Texture> tex;
-};
 
 class UI {
     public:
@@ -49,7 +43,7 @@ class Field {
         std::vector<shared_ptr<Entity>> entityList = {};
         shared_ptr<Entity> entityCurrent;
 
-        Field();
+        Field(shared_ptr<Game>);
         void handleTick(shared_ptr<Game>);
         void render(shared_ptr<Game>);
 };
@@ -65,14 +59,14 @@ class Entity {
         int frames = 0, frameCurrent = 0;
         float frameInterval = 0, frameTime = 0;
 
-        Entity();
+        Entity(shared_ptr<Game>);
         virtual void render(shared_ptr<Game>);
         virtual void handleTick(shared_ptr<Game>);
 };
 
 class Coin : public Entity {
     public:
-        Coin();
+        Coin(shared_ptr<Game>);
         void render(shared_ptr<Game>);
         void handleTick(shared_ptr<Game>);
 };
@@ -81,7 +75,7 @@ class Unit {
 
 };
 
-class FieldPlayer {
+class FieldPlayer : public Entity {
     public:
         sf::FloatRect rect = {{0.0, 0.0}, {80.0, 80.0}};
         sf::RenderTexture rTex = sf::RenderTexture({80, 80});
@@ -89,7 +83,9 @@ class FieldPlayer {
         sf::Sprite sprite = sf::Sprite(tex);
         sf::Sprite spriteOut = sf::Sprite(tex);
 
-        FieldPlayer();
+        int coin = 0;
+
+        FieldPlayer(shared_ptr<Game>);
         void handleTick(shared_ptr<Game>);
         void render(shared_ptr<Game>);
 };
@@ -124,7 +120,7 @@ class Game {
     public:
         unsigned int width, height;
         sf::RenderWindow window;
-        std::unordered_map<std::string, sf::Texture> tex;
+        std::unordered_map<std::string, sf::Texture> image = {}, tex = {};
         sf::RectangleShape rRect;
         sf::Font neodgm = sf::Font("font/neodgm.ttf");
         sf::Text rText = sf::Text(neodgm, "", 32);

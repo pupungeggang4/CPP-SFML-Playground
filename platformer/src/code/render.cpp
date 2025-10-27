@@ -19,7 +19,7 @@ void Render::renderMenu(shared_ptr<Game> game) {
     Render::fillText(game->window, game->rText, game->locale["to_title"], UI::menu["text_to_title"]);
     Render::drawRect(game->window, game->rRect, UI::menu["button_exit"], 2);
     Render::fillText(game->window, game->rText, game->locale["exit"], UI::menu["text_exit"]);
-    Render::drawImage(game->window, game->sprite, game->tex["arrow"], UI::menuArrow[game->selectedMenu]);
+    Render::drawImage(game->window, game->sprite, game->image["arrow"], UI::menuArrow[game->selectedMenu]);
 }
 
 void Render::drawRect(sf::RenderTarget& rt, sf::RectangleShape rRect, std::vector<int> pos, float thickness) {

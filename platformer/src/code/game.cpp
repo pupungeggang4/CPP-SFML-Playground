@@ -2,6 +2,7 @@
 #include "decl.hpp"
 
 Game::Game() {
+    std::srand(std::time(NULL));
     sf::err().rdbuf(NULL);
     sf::VideoMode videoMode = sf::VideoMode::getDesktopMode();
     if (videoMode.size.x > 2560) {
@@ -13,6 +14,7 @@ Game::Game() {
     }
 
     window = sf::RenderWindow(sf::VideoMode({width, height}), "Auto Card Battle");
+    //window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(60);
     sf::View view({640, 360}, {1280, 720});
     window.setView(view);
@@ -20,25 +22,27 @@ Game::Game() {
     loadImage();
 }
 
+void Game::loadImage() {
+    image.insert(std::make_pair("arrow", sf::Texture("image/arrow.png")));
+    image.insert(std::make_pair("player", sf::Texture("image/player.png")));
+    image.insert(std::make_pair("coin", sf::Texture("image/iconcoin.png")));
+    tex.insert(std::make_pair("coin", sf::Texture("image/sprite/spritecoin.png")));
+}
+
 void Game::init(shared_ptr<Game> game) {
-    field = make_shared<Field>();
+    field = make_shared<Field>(game);
     frameCurrent = 0;
     framePrevious = clock.getElapsedTime().asSeconds();
     delta = 0.016;
     locale = Locale::data[lang];
 }
 
-void Game::loadImage() {
-    Res::tex.insert(std::make_pair("arrow", sf::Texture("image/arrow.png")));
-    Res::tex.insert(std::make_pair("player", sf::Texture("image/player.png")));
-    Res::tex.insert(std::make_pair("coin", sf::Texture("image/sprite/spritecoin.png")));
-    tex.insert(std::make_pair("arrow", sf::Texture("image/arrow.png")));
-    tex.insert(std::make_pair("player", sf::Texture("image/player.png")));
-    tex.insert(std::make_pair("coin", sf::Texture("image/sprite/spritecoin.png")));
-}
-
 void Game::run(shared_ptr<Game> game) {
     while (game->window.isOpen()) {
+        frameCurrent = clock.getElapsedTime().asSeconds();
+        delta = frameCurrent - framePrevious;
+        framePrevious = clock.getElapsedTime().asSeconds();
+        //std::cout << delta << std::endl;
         game->handleInput(game);
         game->handleScene(game);
     }
@@ -104,10 +108,6 @@ void Game::handleInput(shared_ptr<Game> game) {
 }
 
 void Game::handleScene(shared_ptr<Game> game) {
-    frameCurrent = clock.getElapsedTime().asSeconds();
-    delta = frameCurrent - framePrevious;
-    framePrevious = clock.getElapsedTime().asSeconds();
-
     if (game->scene == "title") {
         SceneTitle::loop(game);
     } else if (game->scene == "field") {

@@ -24,3 +24,7 @@ std::unordered_map<std::string, std::vector<int>> UI::menu = {
     {"text_exit", {340, 460}},
 };
 std::vector<std::vector<int>> UI::menuArrow = {{240, 280}, {240, 360}, {240, 440}};
+std::unordered_map<std::string, std::vector<int>> UI::field = {
+    {"icon_coin", {20, 20}},
+    {"text_coin", {64, 20}}
+};

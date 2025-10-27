@@ -2,13 +2,17 @@
 
 #include <iostream>
 #include <fstream>
+
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+
 #include <string>
 #include <variant>
 #include <array>
 #include <vector>
 #include <unordered_map>
 #include <memory>
-#include <cmath>
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>

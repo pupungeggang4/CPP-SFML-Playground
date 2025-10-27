@@ -33,9 +33,11 @@ Game::Game() {
 
     framePrevious = clock.getElapsedTime().asSeconds();
     frameCurrent = 0;
+}
 
-    field = make_shared<Field>();
-    village = make_shared<Village>();
+void Game::init(shared_ptr<Game> game) {
+    field = make_shared<Field>(game);
+    village = make_shared<Village>(game);
 }
 
 void Game::run(shared_ptr<Game> game) {
@@ -112,9 +114,6 @@ void Game::handleInput(shared_ptr<Game> game) {
 
         }
     }
-}
-
-void Game::init(shared_ptr<Game> game) {
 }
 
 void Game::loadFont() {

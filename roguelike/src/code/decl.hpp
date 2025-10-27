@@ -56,7 +56,7 @@ class Village {
         shared_ptr<VillagePlayer> player;
         shared_ptr<VillagePortal> portalBattle;
 
-        Village();
+        Village(shared_ptr<Game>);
         void handleTick(shared_ptr<Game>);
         void render(shared_ptr<Game>);
 };
@@ -70,7 +70,7 @@ class VillagePlayer {
 
         float speed = 320.0f;
 
-        VillagePlayer();
+        VillagePlayer(shared_ptr<Game>);
         void handleTick(shared_ptr<Game>);
         void render(shared_ptr<Game>);
         void move(shared_ptr<Game>);
@@ -84,7 +84,7 @@ class VillagePortal {
         sf::Texture t;
         sf::Sprite sprite = sf::Sprite(t), spriteOut = sf::Sprite(t);
 
-        VillagePortal();
+        VillagePortal(shared_ptr<Game>);
         void render(shared_ptr<Game>);
 };
 
@@ -95,7 +95,7 @@ class Field {
         std::vector<shared_ptr<Drop>> drop = {};
         shared_ptr<Drop> dropCurrent;
     
-        Field();
+        Field(shared_ptr<Game>);
         void handleTick(shared_ptr<Game>);
         void render(shared_ptr<Game>);
 };
@@ -107,14 +107,14 @@ class Entity {
         sf::RenderTexture rt = sf::RenderTexture({80, 80});
         sf::Sprite sprite = sf::Sprite(t), spriteOut = sf::Sprite(t);
 
-        Entity();
+        Entity(shared_ptr<Game>);
         void handleTick(shared_ptr<Game>);
         void render(shared_ptr<Game>);
 };
 
 class Unit : public Entity {
     public:
-        Unit();
+        Unit(shared_ptr<Game>);
         //void handleTick(shared_ptr<Game>);
         //void render(shared_ptr<Game>)
 };
@@ -124,7 +124,7 @@ class FieldPlayer : public Unit {
         float speed = 320.0f;
         int level = 1, exp = 0, expMax = 20, gold = 50;
         float energy = 0.0f, energyMax = 8.0f, life = 120.0f, lifeMax = 120.0f;
-        FieldPlayer();
+        FieldPlayer(shared_ptr<Game>);
         void handleTick(shared_ptr<Game>);
         void move(shared_ptr<Game>);
         void render(shared_ptr<Game>);
@@ -134,7 +134,7 @@ class Drop : public Entity {
     public:
         std::string type;
         int amount;
-        Drop(std::string, int);
+        Drop(shared_ptr<Game>, std::string, int);
         void handleTick(shared_ptr<Game>);
         void render(shared_ptr<Game>);
 };

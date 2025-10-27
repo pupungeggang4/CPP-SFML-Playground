@@ -1,12 +1,12 @@
 #include "general.hpp"
 #include "decl.hpp"
 
-Field::Field() {
-    player = make_shared<FieldPlayer>();
-    shared_ptr<Drop> d = make_shared<Drop>("coin", 10);
-    drop.push_back(d);
-    d = make_shared<Drop>("exporb", 10);
-    drop.push_back(d);
+Field::Field(shared_ptr<Game> game) {
+    player = make_shared<FieldPlayer>(game);
+    for (int i = 0; i < 10; i++) {
+        shared_ptr<Drop> d = make_shared<Drop>(game, "exporb", 10);
+        drop.push_back(d);
+    }
 }
 
 void Field::handleTick(shared_ptr<Game> game) {
@@ -26,7 +26,7 @@ void Field::render(shared_ptr<Game> game) {
     }
 }
 
-Entity::Entity() {
+Entity::Entity(shared_ptr<Game> game) {
 
 }
 
@@ -38,15 +38,23 @@ void Entity::render(shared_ptr<Game> game) {
 
 }
 
-Unit::Unit() {
+Unit::Unit(shared_ptr<Game> game) : Entity(game) {
 
 }
 
-Drop::Drop(std::string type, int amount) {
+Drop::Drop(shared_ptr<Game> game, std::string type, int amount) : Entity(game) {
     rect.position.x = 200 + std::rand() % 200;
     rect.position.y = -100 + std::rand() % 200;
     this->type = type;
     this->amount = amount;
+
+    if (this->type == "coin") {
+        sprite.setTexture(game->tex["coin"], true);
+    } else if (this->type == "exporb") {
+        sprite.setTexture(game->tex["exporb"], true);
+    }
+    const sf::Texture& tmpTex = rt.getTexture();
+    spriteOut.setTexture(tmpTex, true);
 }
 
 void Drop::handleTick(shared_ptr<Game> game) {
@@ -59,6 +67,7 @@ void Drop::handleTick(shared_ptr<Game> game) {
             if (player->exp >= player->expMax) {
                 player->level += 1;
                 player->exp -= player->expMax;
+                player->expMax = (player->level + 1) * 10;
             }
         }
 
@@ -68,21 +77,19 @@ void Drop::handleTick(shared_ptr<Game> game) {
 
 void Drop::render(shared_ptr<Game> game) {
     rt.clear(sf::Color::Transparent);
-    if (type == "coin") {
-        Render::drawTexture(rt, sprite, game->tex["coin"], {0, 0});
-    } else if (type == "exporb") {
-        Render::drawTexture(rt, sprite, game->tex["exporb"], {0, 0});
-    }
+    rt.draw(sprite);
     rt.display();
 
-    const sf::Texture& tmpTex = rt.getTexture();
-    spriteOut.setTexture(tmpTex, true);
     Render::drawCenterCam(game->window, spriteOut, rect, game->field->camera);
 }
 
-FieldPlayer::FieldPlayer() {
+FieldPlayer::FieldPlayer(shared_ptr<Game> game) : Unit(game) {
     rect.size.x = 80;
     rect.size.y = 80;
+
+    sprite.setTexture(game->tex["player"], true);
+    const sf::Texture& tmpTex = rt.getTexture();
+    spriteOut.setTexture(tmpTex, true);
 }
 
 void FieldPlayer::handleTick(shared_ptr<Game> game) {
@@ -125,10 +132,8 @@ void FieldPlayer::move(shared_ptr<Game> game) {
 
 void FieldPlayer::render(shared_ptr<Game> game) {
     rt.clear(sf::Color::Transparent);
-    Render::drawTexture(rt, sprite, game->tex["player"], {0, 0});
+    rt.draw(sprite);
     rt.display();
 
-    const sf::Texture& tmpTex = rt.getTexture();
-    spriteOut.setTexture(tmpTex, true);
     Render::drawCenterCam(game->window, spriteOut, rect, game->field->camera);
 }
