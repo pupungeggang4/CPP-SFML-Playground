@@ -28,6 +28,11 @@ class SceneBattle;
 
 class Game;
 
+class Res {
+    public:
+        static std::unordered_map<std::string, sf::Texture> img;
+};
+
 class UI {
     public:
         static std::unordered_map<std::string, std::vector<int>> title;
