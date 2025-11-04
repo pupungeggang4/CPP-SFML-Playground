@@ -1,0 +1,24 @@
+cmake_minimum_required(VERSION 3.28)
+project(CMakeSFMLProject LANGUAGES CXX)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+include(FetchContent)
+FetchContent_Declare(SFML
+    GIT_REPOSITORY https://github.com/SFML/SFML.git
+    GIT_TAG 3.0.1
+    GIT_SHALLOW ON
+    EXCLUDE_FROM_ALL
+    SYSTEM)
+FetchContent_MakeAvailable(SFML)
+
+
+file(GLOB SCRIPTS src/code/*.cpp)
+#file(COPY "${CMAKE_SOURCE_DIR}/src/font" DESTINATION "${CMAKE_BINARY_DIR}/bin")
+#file(COPY "${CMAKE_SOURCE_DIR}/src/image" DESTINATION "${CMAKE_BINARY_DIR}/bin")
+
+add_compile_options("-g")
+add_executable(main src/main.cpp ${SCRIPTS})
+target_include_directories(main PUBLIC ${CMAKE_SOURCE_DIR}/src/code)
+target_compile_features(main PRIVATE cxx_std_17)
+target_link_libraries(main PRIVATE SFML::Graphics)
