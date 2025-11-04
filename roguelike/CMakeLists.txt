@@ -20,6 +20,7 @@ add_compile_options("-w")
 add_compile_options("-g")
 add_compile_options("-std=c++17")
 
+
 add_executable(main src/main.cpp ${SCRIPTS})
 target_include_directories(main PUBLIC ${CMAKE_SOURCE_DIR}/src/script)
 target_compile_features(main PRIVATE cxx_std_17)

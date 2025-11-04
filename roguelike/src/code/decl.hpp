@@ -1,6 +1,7 @@
 #pragma once
 #include "general.hpp"
 
+class Res;
 class UI;
 class Locale;
 
@@ -30,7 +31,7 @@ class Game;
 
 class Res {
     public:
-        static std::unordered_map<std::string, sf::Texture> img;
+        static shared_ptr<std::unordered_map<std::string, sf::Texture>> img;
 };
 
 class UI {

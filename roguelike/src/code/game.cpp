@@ -33,6 +33,8 @@ Game::Game() {
 
     framePrevious = clock.getElapsedTime().asSeconds();
     frameCurrent = 0;
+
+    Res::img->insert(std::make_pair("123", sf::Texture("image/arrow.png")));
 }
 
 void Game::init(shared_ptr<Game> game) {
