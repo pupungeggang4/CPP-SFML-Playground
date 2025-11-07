@@ -10,4 +10,6 @@ class Entity;
 class FieldPlayer;
 class Wall;
 class Coin;
+
 class Game;
+class SceneMain;

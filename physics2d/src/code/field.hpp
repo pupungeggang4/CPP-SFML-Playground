@@ -7,4 +7,5 @@ class Field {
     public:
         Field();
         shared_ptr<FieldPlayer> player;
+        std::vector<shared_ptr<Entity>> entityList;
 };

@@ -21,18 +21,28 @@ Game::Game() {
     window.setView(view);
 }
 
-void Game::run() {
-    loop();
+void Game::run(shared_ptr<Game> game) {
+    loop(game);
 }
 
-void Game::loop() {
+void Game::loop(shared_ptr<Game> game) {
     while (window.isOpen()) {
-        while (const std::optional event = window.pollEvent()) {
-            if (event->is<sf::Event::Closed>()) {
-                window.close();
-            }
-        }
-        window.clear();
+        handleInput(game);
+        handleScene(game);
         window.display();
+    }
+}
+
+void Game::handleScene(shared_ptr<Game> game) {
+    if (scene == "main") {
+        SceneMain::loop(game);
+    }
+}
+
+void Game::handleInput(shared_ptr<Game> game) {
+    while (const std::optional event = window.pollEvent()) {
+        if (event->is<sf::Event::Closed>()) {
+            window.close();
+        }
     }
 }
