@@ -17,16 +17,22 @@ Game::Game() {
     window = sf::RenderWindow(sf::VideoMode({width, height}), "Platformer 2D Test", sf::Style::Default, sf::State::Windowed, settings);
     window.setFramerateLimit(60);
     //window.setVerticalSyncEnabled(true);
-    sf::View view({640, 360}, {1280, 720});
-    window.setView(view);
+    UIView = sf::View({640, 360}, {1280, 720});
+    window.setView(UIView);
+
+    field = make_shared<Field>();
 }
 
 void Game::run(shared_ptr<Game> game) {
+    framePrevious = clock.getElapsedTime().asSeconds();
     loop(game);
 }
 
 void Game::loop(shared_ptr<Game> game) {
     while (window.isOpen()) {
+        frameCurrent = clock.getElapsedTime().asSeconds();
+        delta = frameCurrent - framePrevious;
+        framePrevious = clock.getElapsedTime().asSeconds();
         handleInput(game);
         handleScene(game);
         window.display();
