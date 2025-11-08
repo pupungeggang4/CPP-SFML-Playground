@@ -6,7 +6,7 @@ Field::Field() {
 }
 
 void Field::handleTick(shared_ptr<Game> game) {
-    
+    player->handleTick(game);
 }
 
 void Field::render(shared_ptr<Game> game) {

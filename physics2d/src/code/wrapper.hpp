@@ -1,0 +1,11 @@
+#pragma once
+#include "general.hpp"
+#include "fdef.hpp"
+#include "entity.hpp"
+#include "field.hpp"
+#include "fieldplayer.hpp"
+#include "game.hpp"
+#include "player.hpp"
+#include "render.hpp"
+#include "res.hpp"
+#include "scenemain.hpp"

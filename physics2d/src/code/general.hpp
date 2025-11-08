@@ -16,3 +16,11 @@
 
 using std::shared_ptr;
 using std::make_shared;
+
+#define K_RETURN 36
+#define K_ESCAPE 37
+#define K_SPACE 40
+#define K_RIGHT 86
+#define K_LEFT 87
+#define K_DOWN 88
+#define K_UP 89

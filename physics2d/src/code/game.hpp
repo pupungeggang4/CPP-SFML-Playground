@@ -1,9 +1,5 @@
 #pragma once
-#include "general.hpp"
-#include "fdef.hpp"
-
-#include "field.hpp"
-#include "scenemain.hpp"
+#include "wrapper.hpp"
 
 class Game {
     public:
@@ -12,6 +8,9 @@ class Game {
         float frameCurrent = 0, framePrevious = 0, delta = 0;
 
         std::string scene = "main";
+        std::unordered_map<std::string, bool> keyPressed = {
+            {"left", false}, {"right", false}, {"up", false}, {"down", false}
+        };
         shared_ptr<Field> field;
 
         Game();

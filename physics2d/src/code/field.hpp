@@ -1,9 +1,6 @@
 #pragma once
-#include "general.hpp"
-#include "fdef.hpp"
+#include "wrapper.hpp"
 
-#include "game.hpp"
-#include "fieldplayer.hpp"
 
 class Field {
     public:
