@@ -1,4 +1,5 @@
 #pragma once
+#include "res.hpp"
 #include "general.hpp"
 
 class Game;
@@ -12,8 +13,7 @@ class Entity {
 
 class Coin : public Entity {
     public:
-        sf::Texture texture = sf::Texture();
-        sf::Sprite sprite = sf::Sprite(texture);
+        sf::Sprite sprite;
         sf::FloatRect rect = sf::FloatRect({{0, 0}, {40, 40}});
         std::vector<sf::IntRect> frameCoord = {
             {{0, 0}, {40, 40}}, {{40, 0}, {40, 40}}, {{80, 0}, {40, 40}}, {{120, 0}, {40, 40}}
@@ -26,6 +26,7 @@ class Coin : public Entity {
 
 class Wall : public Entity {
     public:
+        sf::Sprite sprite;
         sf::FloatRect rect = sf::FloatRect({{0, 80}, {160, 40}});
         sf::RectangleShape rectS = sf::RectangleShape({160, 40});
         Wall();

@@ -6,6 +6,8 @@ class Game;
 
 class FieldPlayer : public Entity {
     public:
+        //sf::Texture texture = sf::Texture();
+        //sf::Sprite sprite = sf::Sprite(texture);
         sf::FloatRect rect = sf::FloatRect({{0, 0}, {80, 80}});
         sf::RectangleShape rectS = sf::RectangleShape({80, 80});
         sf::Vector2f velocity = sf::Vector2f({0, 0});

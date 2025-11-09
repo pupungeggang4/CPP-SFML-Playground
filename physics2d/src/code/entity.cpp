@@ -15,8 +15,7 @@ void Entity::render(shared_ptr<Game> game) {
     
 }
 
-Coin::Coin() : Entity() {
-    texture = sf::Texture(Res::texture->at("sprite_coin"));
+Coin::Coin() : Entity(), sprite(sf::Sprite(Res::texture->at("sprite_coin"))) {
 }
 
 void Coin::render(shared_ptr<Game> game) {
@@ -27,14 +26,16 @@ void Coin::render(shared_ptr<Game> game) {
     game->window.draw(sprite);
 }
 
-Wall::Wall() : Entity() {
+Wall::Wall() : Entity(), sprite(sf::Sprite(Res::texture->at("stone"))) {
     rectS.setOutlineColor(sf::Color::Black);
     rectS.setOutlineThickness(2);
     rectS.setPosition(rect.position);
+    sprite.setTextureRect(sf::IntRect(rect));
 }
 
 void Wall::render(shared_ptr<Game> game) {
-    Render::drawRectAtCenter(game->window, rectS, rect);
+    sprite.setPosition(rect.position - rect.size / 2.0f);
+    game->window.draw(sprite);
 }
 
 Platform::Platform() : Entity() {
