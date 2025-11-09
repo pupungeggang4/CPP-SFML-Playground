@@ -2,6 +2,8 @@
 #include "general.hpp"
 
 class Field;
+class Scene;
+class SceneTitle;
 
 class Game {
     public:
@@ -14,6 +16,7 @@ class Game {
             {"left", false}, {"right", false}, {"up", false}, {"down", false}
         };
         shared_ptr<Field> field;
+        shared_ptr<Scene> currentScene;
 
         Game();
         void run(shared_ptr<Game>);

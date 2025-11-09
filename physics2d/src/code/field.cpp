@@ -13,9 +13,14 @@ Field::Field() {
 
 void Field::handleTick(shared_ptr<Game> game) {
     player->handleTick(game);
+    for (int i = entityList.size() - 1; i >= 0; i--) {
+        currentEntity = entityList[i];
+        currentEntity->handleTick(game);
+    }
 }
 
 void Field::render(shared_ptr<Game> game) {
+    game->window.setView(view);
     player->render(game);
     for (int i = 0; i < entityList.size(); i++) {
         entityList[i]->render(game);

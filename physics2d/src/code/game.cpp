@@ -1,5 +1,6 @@
 #include "res.hpp"
 #include "field.hpp"
+#include "scene.hpp"
 #include "scenemain.hpp"
 #include "game.hpp"
 
@@ -24,6 +25,8 @@ Game::Game() {
     window.setView(UIView);
 
     Res::loadImage();
+    
+    currentScene = make_shared<SceneMain>();
     field = make_shared<Field>();
 }
 
@@ -44,9 +47,7 @@ void Game::loop(shared_ptr<Game> game) {
 }
 
 void Game::handleScene(shared_ptr<Game> game) {
-    if (scene == "main") {
-        SceneMain::loop(game);
-    }
+    currentScene->loop(game);
 }
 
 void Game::handleInput(shared_ptr<Game> game) {

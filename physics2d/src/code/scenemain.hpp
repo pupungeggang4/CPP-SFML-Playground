@@ -1,10 +1,16 @@
 #pragma once
 #include "general.hpp"
+#include "scene.hpp"
 
 class Game;
 
-class SceneMain {
+class SceneMain : public Scene {
     public:
-        static void loop(shared_ptr<Game>);
-        static void render(shared_ptr<Game>);
+        sf::Texture tempTex = sf::Texture();
+        sf::Font tempFont = sf::Font();
+        sf::Sprite iconCoin = sf::Sprite(tempTex); 
+        sf::Text textCoin = sf::Text(tempFont);
+        SceneMain();
+        void loop(shared_ptr<Game>);
+        void render(shared_ptr<Game>);
 };

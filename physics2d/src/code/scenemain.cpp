@@ -1,6 +1,20 @@
 #include "scenemain.hpp"
+#include "res.hpp"
+#include "entity.hpp"
 #include "field.hpp"
+#include "fieldplayer.hpp"
+#include "scene.hpp"
 #include "game.hpp"
+
+SceneMain::SceneMain() {
+    iconCoin.setTexture(Res::texture->at("coin"), true);
+    iconCoin.setPosition({20, 20});
+    textCoin.setFont(*Res::neodgm);
+    textCoin.setFillColor(sf::Color::Black);
+    textCoin.setCharacterSize(32);
+    textCoin.setString("");
+    textCoin.setPosition({64, 20});
+}
 
 void SceneMain::loop(shared_ptr<Game> game) {
     game->field->handleTick(game);
@@ -9,6 +23,9 @@ void SceneMain::loop(shared_ptr<Game> game) {
 
 void SceneMain::render(shared_ptr<Game> game) {
     game->window.clear(sf::Color::White);
-    game->window.setView(game->field->view);
     game->field->render(game);
+    game->window.setView(game->UIView);
+    game->window.draw(iconCoin);
+    textCoin.setString(std::to_string(game->field->player->coin));
+    game->window.draw(textCoin);
 }

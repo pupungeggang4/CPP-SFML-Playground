@@ -1,11 +1,10 @@
 #include "fieldplayer.hpp"
 #include "game.hpp"
 #include "render.hpp"
+#include "res.hpp"
 
-FieldPlayer::FieldPlayer() {
-    rectS.setOutlineColor(sf::Color::Black);
-    rectS.setOutlineThickness(2);
-    rectS.setPosition(rect.position);
+FieldPlayer::FieldPlayer() : sprite(Res::texture->at("player")) {
+    coin = 0;
 }
 
 void FieldPlayer::handleTick(shared_ptr<Game> game) {
@@ -18,5 +17,6 @@ void FieldPlayer::handleTick(shared_ptr<Game> game) {
 }
 
 void FieldPlayer::render(shared_ptr<Game> game) {
-    Render::drawRectAtCenter(game->window, rectS, rect);
+    sprite.setPosition(rect.position - rect.size / 2.0f);
+    game->window.draw(sprite);
 }

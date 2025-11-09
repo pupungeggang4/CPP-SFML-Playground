@@ -1,11 +1,13 @@
 #pragma once
-#include "res.hpp"
 #include "general.hpp"
 
 class Game;
 
 class Entity {
     public:
+        sf::Sprite sprite;
+        sf::FloatRect rect = sf::FloatRect({{0, 0}, {40, 40}});
+
         Entity();
         virtual void handleTick(shared_ptr<Game>);
         virtual void render(shared_ptr<Game>);
@@ -21,6 +23,7 @@ class Coin : public Entity {
         int frames = 4, frameCurrent = 0; float frameTime = 0, frameInterval = 0.2;
 
         Coin();
+        void handleTick(shared_ptr<Game>);
         void render(shared_ptr<Game>);
 };
 
@@ -35,6 +38,7 @@ class Wall : public Entity {
 
 class Platform : public Entity {
     public:
+        sf::Sprite sprite;
         sf::FloatRect rect = sf::FloatRect({{200, 80}, {160, 40}});
         sf::RectangleShape rectS = sf::RectangleShape({160, 40});
         Platform();
