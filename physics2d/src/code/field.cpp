@@ -7,6 +7,8 @@ Field::Field() {
     player = make_shared<FieldPlayer>();
     entityList = std::vector<shared_ptr<Entity>>();
     entityList.push_back(make_shared<Coin>());
+    entityList.push_back(make_shared<Platform>());
+    entityList.push_back(make_shared<Wall>());
 }
 
 void Field::handleTick(shared_ptr<Game> game) {

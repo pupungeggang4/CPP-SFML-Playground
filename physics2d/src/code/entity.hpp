@@ -24,3 +24,18 @@ class Coin : public Entity {
         void render(shared_ptr<Game>);
 };
 
+class Wall : public Entity {
+    public:
+        sf::FloatRect rect = sf::FloatRect({{0, 80}, {160, 40}});
+        sf::RectangleShape rectS = sf::RectangleShape({160, 40});
+        Wall();
+        void render(shared_ptr<Game>);
+};
+
+class Platform : public Entity {
+    public:
+        sf::FloatRect rect = sf::FloatRect({{200, 80}, {160, 40}});
+        sf::RectangleShape rectS = sf::RectangleShape({160, 40});
+        Platform();
+        void render(shared_ptr<Game>);
+};
