@@ -1,17 +1,21 @@
 #pragma once
-#include "wrapper.hpp"
+#include "general.hpp"
+
+class Game;
 
 class Entity {
     public:
         Entity();
+        virtual void handleTick(shared_ptr<Game>);
+        virtual void render(shared_ptr<Game>);
 };
 
 class Coin : public Entity {
     public:
-        sf::Texture &texture = Res::texture->at("sprite_coin");
+        sf::Texture texture = sf::Texture();
         sf::Sprite sprite = sf::Sprite(texture);
         sf::FloatRect rect = sf::FloatRect({{0, 0}, {40, 40}});
-        std::vector<sf::FloatRect> frameCoord = {
+        std::vector<sf::IntRect> frameCoord = {
             {{0, 0}, {40, 40}}, {{40, 0}, {40, 40}}, {{80, 0}, {40, 40}}, {{120, 0}, {40, 40}}
         };
         int frames = 4, frameCurrent = 0; float frameTime = 0, frameInterval = 0.2;

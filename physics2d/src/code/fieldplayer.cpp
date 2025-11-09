@@ -1,5 +1,6 @@
-#include "entity.hpp"
 #include "fieldplayer.hpp"
+#include "game.hpp"
+#include "render.hpp"
 
 FieldPlayer::FieldPlayer() {
     rectS.setOutlineColor(sf::Color::Black);

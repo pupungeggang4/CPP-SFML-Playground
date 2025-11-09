@@ -1,5 +1,7 @@
 #pragma once
-#include "wrapper.hpp"
+#include "general.hpp"
+
+class Game;
 
 class SceneMain {
     public:

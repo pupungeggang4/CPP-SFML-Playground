@@ -1,6 +1,8 @@
 #pragma once
-#include "wrapper.hpp"
+#include "general.hpp"
+#include "entity.hpp"
 
+class Game;
 
 class FieldPlayer : public Entity {
     public:

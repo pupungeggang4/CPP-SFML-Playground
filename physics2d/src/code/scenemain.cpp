@@ -1,4 +1,6 @@
 #include "scenemain.hpp"
+#include "field.hpp"
+#include "game.hpp"
 
 void SceneMain::loop(shared_ptr<Game> game) {
     game->field->handleTick(game);

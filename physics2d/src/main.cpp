@@ -1,4 +1,5 @@
-#include "code/wrapper.hpp"
+#include "code/game.hpp"
+#include "code/res.hpp"
 
 int main()
 {

@@ -1,3 +1,6 @@
+#include "res.hpp"
+#include "field.hpp"
+#include "scenemain.hpp"
 #include "game.hpp"
 
 Game::Game() {
