@@ -1,2 +1,1 @@
-start_pos 0 0 coin -80 0 coin 80 0
-coin -160 0
+start_pos 0 0 coin -80 0 coin 80 0 coin -160 0 coin 160 0 coin 80 -80 coin -80 -80 coin 160 -80 coin -160 -80
