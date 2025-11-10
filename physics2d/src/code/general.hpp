@@ -4,7 +4,11 @@
 #include <ctime>
 
 #include <string>
+#include <fstream>
+#include <sstream>
 #include <vector>
+#include <iterator>
+#include <algorithm>
 #include <map>
 #include <unordered_map>
 #include <optional>

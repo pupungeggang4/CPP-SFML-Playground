@@ -1,0 +1,2 @@
+start_pos 0 0 coin -80 0 coin 80 0
+coin -160 0

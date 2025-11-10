@@ -2,6 +2,7 @@
 #include "field.hpp"
 #include "scene.hpp"
 #include "scenemain.hpp"
+#include "level.hpp"
 #include "game.hpp"
 
 Game::Game() {
@@ -25,9 +26,9 @@ Game::Game() {
     window.setView(UIView);
 
     Res::loadImage();
-    
     currentScene = make_shared<SceneMain>();
     field = make_shared<Field>();
+    LevelLoader::loadLevel(field, "data/level1.txt");
 }
 
 void Game::run(shared_ptr<Game> game) {
