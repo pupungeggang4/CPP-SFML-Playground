@@ -1,5 +1,6 @@
-#include "general.hpp"
-#include "decl.hpp"
+#include "field.hpp"
+#include "game.hpp"
+#include "render.hpp"
 
 Field::Field(shared_ptr<Game> game) {
     player = make_shared<FieldPlayer>(game);

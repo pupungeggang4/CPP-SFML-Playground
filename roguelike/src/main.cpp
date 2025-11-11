@@ -1,5 +1,6 @@
 #include "code/general.hpp"
-#include "code/decl.hpp"
+#include "code/game.hpp"
+#include "code/res.hpp"
 
 int main(int argc, char* argv[]) {
     shared_ptr<Game> game = make_shared<Game>();

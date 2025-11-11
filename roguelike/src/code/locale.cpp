@@ -1,5 +1,4 @@
-#include "general.hpp"
-#include "decl.hpp"
+#include "locale.hpp"
 
 std::unordered_map<std::string, std::unordered_map<std::string, sf::String>> Locale::data = {
     {"ko", {

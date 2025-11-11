@@ -1,5 +1,11 @@
-#include "general.hpp"
-#include "decl.hpp"
+#include "game.hpp"
+
+#include "res.hpp"
+#include "locale.hpp"
+#include "village.hpp"
+#include "field.hpp"
+
+#include "scenetitle.hpp"
 
 Game::Game() {
     std::srand(std::time(0));
@@ -34,6 +40,7 @@ Game::Game() {
     framePrevious = clock.getElapsedTime().asSeconds();
     frameCurrent = 0;
 
+    scene = make_shared<SceneTitle>();
     Res::img->insert(std::make_pair("123", sf::Texture("image/arrow.png")));
 }
 
@@ -54,13 +61,7 @@ void Game::run(shared_ptr<Game> game) {
 }
 
 void Game::handleScene(shared_ptr<Game> game) {
-    if (game->scene == "title") {
-        SceneTitle::loop(game);
-    } else if (game->scene == "village") {
-        SceneVillage::loop(game);
-    } else if (game->scene == "battle") {
-        SceneBattle::loop(game);
-    }
+    game->scene->loop(game);
 }
 
 void Game::handleInput(shared_ptr<Game> game) {
@@ -83,13 +84,7 @@ void Game::handleInput(shared_ptr<Game> game) {
             if (key == K_DOWN) {
                 keyPressed["down"] = true;
             }
-            if (game->scene == "title") {
-                SceneTitle::keyDown(game, key);
-            } else if (game->scene == "village") {
-                SceneVillage::keyDown(game, key);
-            } else if (game->scene == "battle") {
-                SceneBattle::keyDown(game, key);
-            }
+            game->scene->keyDown(game, key);
         }
 
         if (const auto *keyRelease = event->getIf<sf::Event::KeyReleased>()) {
@@ -106,14 +101,7 @@ void Game::handleInput(shared_ptr<Game> game) {
             if (key == K_DOWN) {
                 keyPressed["down"] = false;
             }
-            if (game->scene == "title") {
-                SceneTitle::keyUp(game, key);
-            } else if (game->scene == "village") {
-                SceneVillage::keyUp(game, key);
-            } else if (game->scene == "battle") {
-                SceneBattle::keyUp(game, key);
-            }
-
+            game->scene->keyUp(game, key);
         }
     }
 }

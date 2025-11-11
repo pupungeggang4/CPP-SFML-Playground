@@ -1,6 +1,7 @@
-#pragma once
-#include "general.hpp"
-#include "decl.hpp"
+#include "render.hpp"
+#include "ui.hpp"
+#include "game.hpp"
+#include "field.hpp"
 
 void Render::renderInit(shared_ptr<Game> game) {
     game->rRect.setOutlineColor(sf::Color::Black);

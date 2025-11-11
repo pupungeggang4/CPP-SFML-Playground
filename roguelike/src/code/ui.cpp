@@ -1,5 +1,4 @@
-#include "general.hpp"
-#include "decl.hpp"
+#include "ui.hpp"
 
 std::unordered_map<std::string, std::vector<int>> UI::title = {
     {"text_title", {20, 20}},

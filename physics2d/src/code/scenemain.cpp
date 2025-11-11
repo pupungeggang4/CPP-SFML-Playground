@@ -1,6 +1,6 @@
 #include "scenemain.hpp"
 #include "res.hpp"
-#include "entity.hpp"
+//#include "entity.hpp"
 #include "field.hpp"
 #include "fieldplayer.hpp"
 #include "scene.hpp"

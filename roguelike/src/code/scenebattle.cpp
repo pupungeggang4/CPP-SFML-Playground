@@ -1,5 +1,16 @@
-#include "general.hpp"
-#include "decl.hpp"
+#include "scenetitle.hpp"
+#include "scenebattle.hpp"
+#include "scenevillage.hpp"
+
+#include "render.hpp"
+#include "field.hpp"
+#include "village.hpp"
+
+#include "game.hpp"
+
+SceneBattle::SceneBattle() {
+
+}
 
 void SceneBattle::loop(shared_ptr<Game> game) {
     if (game->menu == false) {
@@ -64,11 +75,11 @@ void SceneBattle::keyDown(shared_ptr<Game> game, int key) {
                 game->state = "";
             } else if (game->selectedMenuBattle == 1) {
                 game->menu = false;
-                game->scene = "village";
+                game->scene = make_shared<SceneVillage>();
                 game->state = "";
             } else if (game->selectedMenuBattle == 2) {
                 game->menu = false;
-                game->scene = "title";
+                game->scene = make_shared<SceneTitle>();
                 game->state = "";
             } else if (game->selectedMenuBattle == 3) {
                 game->window.close();

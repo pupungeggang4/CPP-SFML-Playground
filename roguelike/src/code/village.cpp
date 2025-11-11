@@ -1,5 +1,7 @@
-#include "general.hpp"
-#include "decl.hpp"
+#include "village.hpp"
+#include "field.hpp"
+#include "render.hpp"
+#include "game.hpp"
 
 Village::Village(shared_ptr<Game> game) {
     player = make_shared<VillagePlayer>(game);

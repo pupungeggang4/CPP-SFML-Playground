@@ -1,5 +1,17 @@
-#include "general.hpp"
-#include "decl.hpp"
+#include "scenetitle.hpp"
+#include "scenebattle.hpp"
+#include "scenevillage.hpp"
+
+#include "ui.hpp"
+#include "locale.hpp"
+#include "render.hpp"
+#include "village.hpp"
+
+#include "game.hpp"
+
+SceneTitle::SceneTitle() {
+
+}
 
 void SceneTitle::loop(shared_ptr<Game> game) {
     render(game);
@@ -30,7 +42,7 @@ void SceneTitle::keyDown(shared_ptr<Game> game, int key) {
         game->selectedTitle = (game->selectedTitle + 1) % 5;
     } else if (key == K_RETURN) {
         if (game->selectedTitle == 0) {
-            game->scene = "village";
+            game->scene = make_shared<SceneVillage>();
             game->state = "";
             game->village = make_shared<Village>(game);
         } else if (game->selectedTitle == 1) {
