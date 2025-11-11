@@ -33,8 +33,6 @@ class Game {
 
         Game();
         void init(shared_ptr<Game>);
-        void loadFont();
-        void loadImage();
         void run(shared_ptr<Game>);
         void handleScene(shared_ptr<Game>);
         void handleInput(shared_ptr<Game>);

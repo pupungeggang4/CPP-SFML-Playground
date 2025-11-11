@@ -1,4 +1,5 @@
 #include "field.hpp"
+#include "res.hpp"
 #include "game.hpp"
 #include "render.hpp"
 
@@ -50,9 +51,9 @@ Drop::Drop(shared_ptr<Game> game, std::string type, int amount) : Entity(game) {
     this->amount = amount;
 
     if (this->type == "coin") {
-        sprite.setTexture(game->tex["coin"], true);
+        sprite.setTexture(Res::img->at("coin"), true);
     } else if (this->type == "exporb") {
-        sprite.setTexture(game->tex["exporb"], true);
+        sprite.setTexture(Res::img->at("exporb"), true);
     }
     const sf::Texture& tmpTex = rt.getTexture();
     spriteOut.setTexture(tmpTex, true);
@@ -88,7 +89,7 @@ FieldPlayer::FieldPlayer(shared_ptr<Game> game) : Unit(game) {
     rect.size.x = 80;
     rect.size.y = 80;
 
-    sprite.setTexture(game->tex["player"], true);
+    sprite.setTexture(Res::img->at("player"), true);
     const sf::Texture& tmpTex = rt.getTexture();
     spriteOut.setTexture(tmpTex, true);
 }

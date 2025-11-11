@@ -28,11 +28,11 @@ Game::Game() {
     sf::View view({640, 360}, {1280, 720});
     window.setView(view);
 
-    loadFont();
-    loadImage();
+    Res::loadFont();
+    Res::loadImage();
     locale = Locale::data[lang];
 
-    rText = sf::Text(neodgm, "", 32);
+    rText = sf::Text(*Res::neodgm, "", 32);
     rText.setFillColor(sf::Color::Black);
     rRect.setOutlineThickness(2);
     rRect.setOutlineColor(sf::Color::Black);
@@ -41,7 +41,6 @@ Game::Game() {
     frameCurrent = 0;
 
     scene = make_shared<SceneTitle>();
-    Res::img->insert(std::make_pair("123", sf::Texture("image/arrow.png")));
 }
 
 void Game::init(shared_ptr<Game> game) {
@@ -104,20 +103,4 @@ void Game::handleInput(shared_ptr<Game> game) {
             game->scene->keyUp(game, key);
         }
     }
-}
-
-void Game::loadFont() {
-    neodgm = sf::Font("font/neodgm.ttf");
-    neodgm.setSmooth(false);
-}
-
-void Game::loadImage() {
-    tex.emplace("arrow", sf::Texture("image/arrow.png"));
-    tex.emplace("player", sf::Texture("image/player.png"));
-    tex.emplace("portal", sf::Texture("image/portal.png"));
-    tex.emplace("arrow_down", sf::Texture("image/arrowdown.png"));
-    tex.emplace("exporb", sf::Texture("image/exporb.png"));
-    tex.emplace("coin", sf::Texture("image/coin.png"));
-    tex.emplace("life", sf::Texture("image/life.png"));
-    tex.emplace("energy", sf::Texture("image/energy.png"));
 }

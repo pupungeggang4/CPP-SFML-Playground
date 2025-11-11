@@ -1,4 +1,6 @@
 #include "village.hpp"
+
+#include "res.hpp"
 #include "field.hpp"
 #include "render.hpp"
 #include "game.hpp"
@@ -18,7 +20,7 @@ void Village::render(shared_ptr<Game> game) {
 }
 
 VillagePlayer::VillagePlayer(shared_ptr<Game> game) {
-    sprite.setTexture(game->tex["player"], true);
+    sprite.setTexture(Res::img->at("player"), true);
     const sf::Texture& tmpTex = sprite.getTexture();
     spriteOut.setTexture(tmpTex, true);
 }
@@ -78,7 +80,7 @@ void VillagePlayer::render(shared_ptr<Game> game) {
 }
 
 VillagePortal::VillagePortal(shared_ptr<Game> game) {
-    sprite.setTexture(game->tex["portal"], true);
+    sprite.setTexture(Res::img->at("portal"), true);
     const sf::Texture& tmpTex = sprite.getTexture();
     spriteOut.setTexture(tmpTex, true);
 }

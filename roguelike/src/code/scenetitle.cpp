@@ -3,6 +3,7 @@
 #include "scenevillage.hpp"
 
 #include "ui.hpp"
+#include "res.hpp"
 #include "locale.hpp"
 #include "render.hpp"
 #include "village.hpp"
@@ -31,7 +32,7 @@ void SceneTitle::render(shared_ptr<Game> game) {
     Render::fillText(game->window, game->rText, game->locale["erase_data"], UI::title["text_erase"]);
     Render::drawRect(game->window, game->rRect, UI::title["button_exit"], 2);
     Render::fillText(game->window, game->rText, game->locale["exit"], UI::title["text_exit"]);
-    Render::drawTexture(game->window, game->sprite, game->tex["arrow"], UI::titleArrow[game->selectedTitle]);
+    Render::drawTexture(game->window, game->sprite, Res::img->at("arrow"), UI::titleArrow[game->selectedTitle]);
     game->window.display();
 }
 
