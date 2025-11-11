@@ -1,1 +1,2 @@
 start_pos 0 0 coin -80 0 coin 80 0 coin -160 0 coin 160 0 coin 80 -80 coin -80 -80 coin 160 -80 coin -160 -80
+wall 0 80 160 80 platform 200 60 160 40 wall 320 0 80 160

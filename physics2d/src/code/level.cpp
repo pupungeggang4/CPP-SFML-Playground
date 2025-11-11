@@ -28,6 +28,27 @@ void LevelLoader::loadLevel(shared_ptr<Field> field, std::string path) {
                 coin->rect.position.y = y;
                 field->entityList.push_back(coin);
             }
+            if (first == "platform") {
+                float x, y, w, h;
+                iss >> x >> y >> w >> h;
+                shared_ptr<Platform> platform = make_shared<Platform>();
+                platform->rect.position.x = x;
+                platform->rect.position.y = y;
+                platform->rect.size.x = w;
+                platform->rect.size.y = h;
+                field->entityList.push_back(platform);
+            }
+            if (first == "wall") {
+                float x, y, w, h;
+                iss >> x >> y >> w >> h;
+                shared_ptr<Wall> wall = make_shared<Wall>();
+                wall->rect.position.x = x;
+                wall->rect.position.y = y;
+                wall->rect.size.x = w;
+                wall->rect.size.y = h;
+                wall->sprite.setTextureRect(sf::IntRect(wall->rect));
+                field->entityList.push_back(wall);
+            }
         }
     }
     std::cout << "Loaded level" << std::endl;

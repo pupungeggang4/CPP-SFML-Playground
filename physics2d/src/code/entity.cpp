@@ -40,7 +40,7 @@ void Coin::handleTick(shared_ptr<Game> game) {
 }
 
 Wall::Wall() : sprite(Res::texture->at("stone")) {
-    sprite.setTextureRect(sf::IntRect(rect));
+
 }
 
 void Wall::render(shared_ptr<Game> game) {
