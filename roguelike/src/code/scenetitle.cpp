@@ -10,7 +10,7 @@
 
 #include "game.hpp"
 
-SceneTitle::SceneTitle() {
+SceneTitle::SceneTitle(shared_ptr<Game> game) {
 
 }
 
@@ -43,7 +43,7 @@ void SceneTitle::keyDown(shared_ptr<Game> game, int key) {
         game->selectedTitle = (game->selectedTitle + 1) % 5;
     } else if (key == K_RETURN) {
         if (game->selectedTitle == 0) {
-            game->scene = make_shared<SceneVillage>();
+            game->scene = make_shared<SceneVillage>(game);
             game->state = "";
             game->village = make_shared<Village>(game);
         } else if (game->selectedTitle == 1) {

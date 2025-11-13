@@ -6,7 +6,7 @@ class Game;
 
 class SceneVillage : public Scene {
     public:
-        SceneVillage();
+        SceneVillage(shared_ptr<Game>);
         void loop(shared_ptr<Game>);
         void render(shared_ptr<Game>);
         void keyDown(shared_ptr<Game>, int);

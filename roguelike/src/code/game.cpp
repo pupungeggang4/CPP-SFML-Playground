@@ -39,11 +39,10 @@ Game::Game() {
 
     framePrevious = clock.getElapsedTime().asSeconds();
     frameCurrent = 0;
-
-    scene = make_shared<SceneTitle>();
 }
 
 void Game::init(shared_ptr<Game> game) {
+    scene = make_shared<SceneTitle>(game);
     field = make_shared<Field>(game);
     village = make_shared<Village>(game);
 }

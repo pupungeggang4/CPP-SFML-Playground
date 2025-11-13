@@ -1,12 +1,14 @@
 #include "scenetitle.hpp"
 #include "scenebattle.hpp"
 #include "scenevillage.hpp"
-#include "game.hpp"
+
 #include "village.hpp"
 #include "render.hpp"
 #include "field.hpp"
 
-SceneVillage::SceneVillage() {
+#include "game.hpp"
+
+SceneVillage::SceneVillage(shared_ptr<Game> game) {
 
 }
 
@@ -56,7 +58,7 @@ void SceneVillage::keyDown(shared_ptr<Game> game, int key) {
             }
             if (key == K_RETURN) {
                 if (game->selectedAdventureConfirm == 0) {
-                    game->scene = make_shared<SceneBattle>();
+                    game->scene = make_shared<SceneBattle>(game);
                     game->state = "adventure_start";
                     game->selectedAdventureStart = 0;
                     game->field = make_shared<Field>(game);
@@ -80,7 +82,7 @@ void SceneVillage::keyDown(shared_ptr<Game> game, int key) {
                 game->menu = false;
             } else if (game->selectedMenuVillage == 1) {
                 game->menu = false;
-                game->scene = make_shared<SceneTitle>();
+                game->scene = make_shared<SceneTitle>(game);
             } else if (game->selectedMenuVillage == 2) {
                 game->window.close();
             }

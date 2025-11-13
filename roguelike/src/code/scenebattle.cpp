@@ -8,7 +8,7 @@
 
 #include "game.hpp"
 
-SceneBattle::SceneBattle() {
+SceneBattle::SceneBattle(shared_ptr<Game> game) {
 
 }
 
@@ -75,11 +75,11 @@ void SceneBattle::keyDown(shared_ptr<Game> game, int key) {
                 game->state = "";
             } else if (game->selectedMenuBattle == 1) {
                 game->menu = false;
-                game->scene = make_shared<SceneVillage>();
+                game->scene = make_shared<SceneVillage>(game);
                 game->state = "";
             } else if (game->selectedMenuBattle == 2) {
                 game->menu = false;
-                game->scene = make_shared<SceneTitle>();
+                game->scene = make_shared<SceneTitle>(game);
                 game->state = "";
             } else if (game->selectedMenuBattle == 3) {
                 game->window.close();
