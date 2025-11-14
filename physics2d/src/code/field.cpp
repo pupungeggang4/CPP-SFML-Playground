@@ -1,5 +1,4 @@
 #include "field.hpp"
-#include "fieldplayer.hpp"
 #include "entity.hpp"
 #include "game.hpp"
 
@@ -14,8 +13,7 @@ Field::Field() {
 void Field::handleTick(shared_ptr<Game> game) {
     player->handleTick(game);
     for (int i = entityList.size() - 1; i >= 0; i--) {
-        currentEntity = entityList[i];
-        currentEntity->handleTick(game);
+        entityList[i]->handleTick(game);
     }
 }
 

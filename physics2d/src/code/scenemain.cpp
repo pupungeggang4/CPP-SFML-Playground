@@ -1,8 +1,7 @@
 #include "scenemain.hpp"
 #include "res.hpp"
-//#include "entity.hpp"
 #include "field.hpp"
-#include "fieldplayer.hpp"
+#include "entity.hpp"
 #include "scene.hpp"
 #include "game.hpp"
 
@@ -28,4 +27,13 @@ void SceneMain::render(shared_ptr<Game> game) {
     game->window.draw(iconCoin);
     textCoin.setString(std::to_string(game->field->player->coin));
     game->window.draw(textCoin);
+}
+
+void SceneMain::keyDown(shared_ptr<Game> game, int key) {
+    if (key == K_UP) {
+        game->field->player->jump();
+    }
+}
+
+void SceneMain::keyUp(shared_ptr<Game> game, int key) {
 }

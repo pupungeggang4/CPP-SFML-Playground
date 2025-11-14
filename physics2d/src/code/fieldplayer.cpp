@@ -1,19 +1,33 @@
-#include "fieldplayer.hpp"
 #include "game.hpp"
-#include "render.hpp"
 #include "res.hpp"
+#include "entity.hpp"
 
-FieldPlayer::FieldPlayer() : sprite(Res::texture->at("player")) {
+FieldPlayer::FieldPlayer() : Entity() {
+    sprite.setTexture(Res::texture->at("player"), true);
+    rect.size = {80, 80};
     coin = 0;
 }
 
 void FieldPlayer::handleTick(shared_ptr<Game> game) {
+    velocity.x = 0;
     if (game->keyPressed["left"]) {
-        rect.position.x -= speed * game->delta;
+        velocity.x -= speed;
     }
     if (game->keyPressed["right"]) {
-        rect.position.x += speed * game->delta;
+        velocity.x += speed;
     }
+    rect.position.x += velocity.x * game->delta;
+    handleCollideX(game);
+    if (velocity.y < terminalSpeed) {
+        velocity.y += gravity * game->delta;
+    }
+    rect.position.y += velocity.y * game->delta;
+    handleFall(game);
+    handleCollideUp(game);
+}
+
+void FieldPlayer::jump() {
+    velocity.y = jumpPower;
 }
 
 void FieldPlayer::render(shared_ptr<Game> game) {

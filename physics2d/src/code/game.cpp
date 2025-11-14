@@ -71,6 +71,7 @@ void Game::handleInput(shared_ptr<Game> game) {
             if (k == K_DOWN) {
                 keyPressed["down"] = true;
             }
+            currentScene->keyDown(game, k);
         }
 
         if (const auto *key = event->getIf<sf::Event::KeyReleased>()) {
@@ -87,6 +88,7 @@ void Game::handleInput(shared_ptr<Game> game) {
             if (k == K_DOWN) {
                 keyPressed["down"] = false;
             }
+            currentScene->keyUp(game, k);
         }
     }
 }

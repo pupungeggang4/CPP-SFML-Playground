@@ -1,6 +1,5 @@
 #include "level.hpp"
 #include "field.hpp"
-#include "fieldplayer.hpp"
 #include "entity.hpp"
 
 void LevelLoader::loadLevel(shared_ptr<Field> field, std::string path) {
