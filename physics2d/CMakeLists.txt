@@ -18,6 +18,7 @@ file(COPY "${CMAKE_SOURCE_DIR}/src/image" DESTINATION "${CMAKE_BINARY_DIR}/bin")
 file(COPY "${CMAKE_SOURCE_DIR}/src/data" DESTINATION "${CMAKE_BINARY_DIR}/bin")
 
 add_compile_options("-g")
+add_compile_options("-std=c++17")
 add_executable(main src/main.cpp ${SCRIPTS})
 target_include_directories(main PUBLIC ${CMAKE_SOURCE_DIR}/src/code)
 target_compile_features(main PRIVATE cxx_std_17)
