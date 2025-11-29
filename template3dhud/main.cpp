@@ -44,7 +44,7 @@ int main (int argc, char** argv) {
         glLoadIdentity();
         glViewport(0, 0, windowSize.x, windowSize.y);
         const sf::Texture& texture = HUD.getTexture();
-        sf::Texture::bind(&texture);
+        sf::Texture::bind(&texture); 
 
         angle += 1.f;
         glRotatef(angle, 1.f, 0.5f, 1.f);
@@ -74,7 +74,6 @@ int main (int argc, char** argv) {
 
         glEnd();
 
-        window.setActive(true);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         glMatrixMode(GL_MODELVIEW);
